@@ -83,8 +83,48 @@ p<- ggplot(t,aes(y=score,x=spec))+geom_bar(stat="identity")+facet_grid(te~.)+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size=5))
 plot(p)
 ```
+# Visualize all TEs
+```{R}
+library(tidyverse)
+theme_set(theme_bw())
 
+h<-read.table("/Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro/te-species-score-cleaned.txt",header=F)
+names(h)<-c("te","species","score")
+h$spec<-str_replace(h$species,".fasta.ori.out","")
+h$spec <- factor(h$spec, levels=c("D.melanogaster", "D.simulans", "D.mauritiana", "D.sechellia", 
+"D.yakuba", "D.teissieri.2733", "D.teissieri.CT02", "D.erecta", 
+"D.ananassae", "C.costata", "D.acanthoptera", "D.ambigua", "D.americana", 
+"D.arawakana", "D.biarmipes", "D.bipectinata", "D.cardini", "D.carrolli", 
+"D.dunni", "D.elegans", "D.equinoxialis", "D.ercepeae", "D.eugracilis", 
+"D.ezoana.masurca", "D.ficusphila", "D.funebris", "D.fuyamai", 
+"D.grimshawi", "D.immigrans.fk05", "D.immigrans.kari17", "D.insularis", 
+"D.jambulina", "D.kikkawai", "D.kurseongensis", "D.littoralis", 
+"D.m.malerkotliana", "D.m.pallens", "D.mojavensis", "D.murphyi", 
+"D.nebulosa", "D.neocordata", "D.obscura", "D.oshimai", "D.p.nigrens", 
+"D.p.pseudoananassae", "D.parabipectinata", "D.paulistorum.L06", 
+"D.paulistorum.L12", "D.persimilis", "D.prosaltans", "D.pruinosa", 
+"D.pseudoobscura", "D.quadrilineata", "D.repleta", "D.repletoides", 
+"D.rhopaloa", "D.rufa", "D.saltans", "D.sp.mushsaotome", "D.spaffchauvacae", 
+"D.sproati", "D.sturtevanti", "D.subobscura", "D.subpulchrella.L1", 
+"D.sucinea", "D.takahashii", "D.triauraria", "D.tristis", "D.tropicalis", 
+"D.varians", "D.virilis", "D.wassermani", "D.willistoni.00", 
+"D.willistoni.17", "L.clarofinis", 
+"L.collinella", "L.magnipectinata", "L.mommai", "L.stackelbergi", 
+"L.varia", "S.graminum", "S.hsui", "S.montana", "S.pallida", 
+"Z.africanus", "Z.camerounensis", "Z.capensis", "Z.davidi", "Z.gabonicus", 
+"Z.ghesquierei", "Z.indianus.16GNV01", "Z.indianus.BS02", "Z.indianus.CDD18", 
+"Z.indianus.RCR04", "Z.inermis", "Z.kolodkinae", "Z.lachaisei", 
+"Z.nigranus", "Z.ornatus", "Z.taronus", "Z.tsacasi.car7-4", "Z.tsacasi", 
+"Z.vittiger"))
+for(tefam in unique(h$te)){
+  t<-subset(h,te %in% c(tefam))
 
+p<- ggplot(t,aes(y=score,x=spec))+geom_bar(stat="identity")+facet_grid(te~.)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size=5))
+plot(p)
+}
+
+```
 
 
 
