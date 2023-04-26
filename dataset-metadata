@@ -1,0 +1,126 @@
+run_accession	sample	year	location	lat	long	study
+SRR23876562	H9	Mid 1800s	Passau, Germany	46	13	museum
+SRR23876563	H10	Early 1800s	Lund, Sweden	56	13	museum
+SRR23876564	H4	Early 1800s	Lund, Sweden	56	13	museum
+SRR23876565	H5	Late 1800s	Zealand, Denmark	55	12	museum
+SRR23876566	H6	Early 1800s	Småland, Sweden (but inferred to be Lund)	57	15	museum
+SRR23876567	H7	1933	Lund, Sweden	56	13	museum
+SRR23876568	H8	1933	Lund, Sweden	56	13	museum
+SRR23876569	H25	Mid 1800s	Passau, Germany	46	13	museum
+SRR23876570	H24	1933	Lund, Sweden	56	13	museum
+SRR23876571	H23	1933	Lund, Sweden	56	13	museum
+SRR23876572	H22	1933	Lund, Sweden	56	13	museum
+SRR23876573	H21	1933	Lund, Sweden	56	13	museum
+SRR23876574	H3	1933	Lund, Sweden	56	13	museum
+SRR23876575	H20	1933	Lund, Sweden	56	13	museum
+SRR23876576	H19	1933	Lund, Sweden	56	13	museum
+SRR23876577	H18	1933	Lund, Sweden	56	13	museum
+SRR23876578	H17	1933	Lund, Sweden	56	13	museum
+SRR23876579	H16	1933	Lund, Sweden	56	13	museum
+SRR23876580	H15	1933	Lund, Sweden	56	13	museum
+SRR23876581	H14	1933	Lund, Sweden	56	13	museum
+SRR23876582	H13	Early 1800s	Lund, Sweden	56	13	museum
+SRR23876583	H12	Early 1800s	Lund, Sweden	56	13	museum
+SRR23876584	H11	Early 1800s	Lund, Sweden	56	13	museum
+SRR23876585	H2	1933	Lund, Sweden	56	13	museum
+SRR23876586	H1	1933	Lund, Sweden	56	13	museum
+SRR11846554	Florida-9	<1952	Florida, USA	28	82	tirant
+SRR11846555	Crimea	1936	Crimea, Ukraine	45	34	tirant
+SRR11846556	Berlin-K	<1950	Berlin, Germany	53	13	tirant
+SRR11846557	Amherst-3	NA	Massachussets, USA	42	71	tirant
+SRR11846558	wk	NA	NA	NA	NA	tirant
+SRR11846559	w1118	<1987	NA	NA	NA	tirant
+SRR11846560	Harwich	1967	Massachussets, USA	42	71	tirant
+SRR11846561	Dmel68	1954	Israel	32	35	tirant
+SRR11846562	Urbana-S	<1938	Illinois, USA	41	89	tirant
+SRR11846563	Swedish-C	<1938(1923)	Stockholm, Sweden	59	18	tirant
+SRR11846564	Lausanne-S	1938	Wisconsin, USA	45	89	tirant
+SRR11846565	Hikone-R	1950-1959	Japan	36	138	tirant
+SRR11846566	Iso-1	NA	NA	NA	NA	tirant
+SRR11846567	Canton-S	1935	Ohio, USA	40	83	tirant
+SRR1662283	B04	NA	Beijing, China	40	116	gdl
+SRR1663528	B05	NA	Beijing, China	40	116	gdl
+SRR1663529	B10	NA	Beijing, China	40	116	gdl
+SRR1663530	B11	NA	Beijing, China	40	116	gdl
+SRR1663531	B12	NA	Beijing, China	40	116	gdl
+SRR1663532	B14	NA	Beijing, China	40	116	gdl
+SRR1663533	B23	NA	Beijing, China	40	116	gdl
+SRR1663534	B28	NA	Beijing, China	40	116	gdl
+SRR1663535	B38	NA	Beijing, China	40	116	gdl
+SRR1663536	B42	NA	Beijing, China	40	116	gdl
+SRR1663537	B43	NA	Beijing, China	40	116	gdl
+SRR1663538	B51	NA	Beijing, China	40	116	gdl
+SRR1663539	B52	NA	Beijing, China	40	116	gdl
+SRR1663540	B54	NA	Beijing, China	40	116	gdl
+SRR1663541	B59	NA	Beijing, China	40	116	gdl
+SRR1663542	I01	NA	Ithaca, USA	42	76	gdl
+SRR1663543	I02	NA	Ithaca, USA	42	76	gdl
+SRR1663544	I03	NA	Ithaca, USA	42	76	gdl
+SRR1663545	I04	NA	Ithaca, USA	42	76	gdl
+SRR1663546	I06	NA	Ithaca, USA	42	76	gdl
+SRR1663547	I07	NA	Ithaca, USA	42	76	gdl
+SRR1663548	I13	NA	Ithaca, USA	42	76	gdl
+SRR1663549	I16	NA	Ithaca, USA	42	76	gdl
+SRR1663550	I17	NA	Ithaca, USA	42	76	gdl
+SRR1663551	I22	NA	Ithaca, USA	42	76	gdl
+SRR1663552	I23	NA	Ithaca, USA	42	76	gdl
+SRR1663553	I24	NA	Ithaca, USA	42	76	gdl
+SRR1663554	I26	NA	Ithaca, USA	42	76	gdl
+SRR1663555	I29	NA	Ithaca, USA	42	76	gdl
+SRR1663556	I31	NA	Ithaca, USA	42	76	gdl
+SRR1663557	I33	NA	Ithaca, USA	42	76	gdl
+SRR1663558	I34	NA	Ithaca, USA	42	76	gdl
+SRR1663559	I35	NA	Ithaca, USA	42	76	gdl
+SRR1663560	I38	NA	Ithaca, USA	42	76	gdl
+SRR1663561	N01	NA	Netherlands	52	5	gdl
+SRR1663562	N02	NA	Netherlands	52	5	gdl
+SRR1663563	N03	NA	Netherlands	52	5	gdl
+SRR1663564	N04	NA	Netherlands	52	5	gdl
+SRR1663565	N07	NA	Netherlands	52	5	gdl
+SRR1663566	N10	NA	Netherlands	52	5	gdl
+SRR1663567	N11	NA	Netherlands	52	5	gdl
+SRR1663568	N13	NA	Netherlands	52	5	gdl
+SRR1663569	N14	NA	Netherlands	52	5	gdl
+SRR1663570	N15	NA	Netherlands	52	5	gdl
+SRR1663571	N16	NA	Netherlands	52	5	gdl
+SRR1663572	N17	NA	Netherlands	52	5	gdl
+SRR1663573	N18	NA	Netherlands	52	5	gdl
+SRR1663574	N19	NA	Netherlands	52	5	gdl
+SRR1663575	N22	NA	Netherlands	52	5	gdl
+SRR1663576	N23	NA	Netherlands	52	5	gdl
+SRR1663577	N25	NA	Netherlands	52	5	gdl
+SRR1663578	N29	NA	Netherlands	52	5	gdl
+SRR1663579	N30	NA	Netherlands	52	5	gdl
+SRR1663580	T01	NA	Tasmania, Australia	43	147	gdl
+SRR1663581	T04	NA	Tasmania, Australia	43	147	gdl
+SRR1663582	T05	NA	Tasmania, Australia	43	147	gdl
+SRR1663583	T07	NA	Tasmania, Australia	43	147	gdl
+SRR1663584	T09	NA	Tasmania, Australia	43	147	gdl
+SRR1663585	T10 female	NA	Tasmania, Australia	43	147	gdl
+SRR1663586	T14A	NA	Tasmania, Australia	43	147	gdl
+SRR1663587	T22A	NA	Tasmania, Australia	43	147	gdl
+SRR1663588	T23	NA	Tasmania, Australia	43	147	gdl
+SRR1663589	T24	NA	Tasmania, Australia	43	147	gdl
+SRR1663590	T25A	NA	Tasmania, Australia	43	147	gdl
+SRR1663591	T29A	NA	Tasmania, Australia	43	147	gdl
+SRR1663592	T30	NA	Tasmania, Australia	43	147	gdl
+SRR1663593	T35	NA	Tasmania, Australia	43	147	gdl
+SRR1663594	T36B	NA	Tasmania, Australia	43	147	gdl
+SRR1663595	T39	NA	Tasmania, Australia	43	147	gdl
+SRR1663596	T43A	NA	Tasmania, Australia	43	147	gdl
+SRR1663597	T45B	NA	Tasmania, Australia	43	147	gdl
+SRR1663598	ZH23	NA	Zimbabwe	19	29	gdl
+SRR1663599	ZH26	NA	Zimbabwe	19	29	gdl
+SRR1663600	ZH33	NA	Zimbabwe	19	29	gdl
+SRR1663601	ZH42	NA	Zimbabwe	19	29	gdl
+SRR1663602	ZS10	NA	Zimbabwe	19	29	gdl
+SRR1663603	ZW09	NA	Zimbabwe	19	29	gdl
+SRR1663604	ZW139	NA	Zimbabwe	19	29	gdl
+SRR1663605	ZW140	NA	Zimbabwe	19	29	gdl
+SRR1663606	ZW142	NA	Zimbabwe	19	29	gdl
+SRR1663607	ZW144	NA	Zimbabwe	19	29	gdl
+SRR1663608	ZW155	NA	Zimbabwe	19	29	gdl
+SRR1663609	ZW177	NA	Zimbabwe	19	29	gdl
+SRR1663610	ZW184	NA	Zimbabwe	19	29	gdl
+SRR1663611	ZW185	NA	Zimbabwe	19	29	gdl
+SRR1769729	ZW155	NA	Zimbabwe	19	29	gdl
