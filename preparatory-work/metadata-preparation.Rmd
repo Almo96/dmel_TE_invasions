@@ -1,0 +1,59 @@
+---
+title: "Metadata preparation"
+output: rmarkdown::github_document
+editor_options: 
+  markdown: 
+    wrap: sentence
+    author: Riccardo
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = '/Users/rpianezza/TE/')
+```
+
+```{r}
+library(tidyverse)
+```
+
+I created a **unique metadata file** for the three merged datasets we are going to use:
+
+* Global diversity lines (**gdl**) - 86 samples
+* Old lab strains from the Tirant paper (**tirant**, ols) - 12 samples (3 files are RNA seq)
+* Museum specimens from 1800 (**museum**) - 25 samples
+
+The file contains the following information:
+
+* **Sample identifier** (should match the name of the downloaded files)
+* **Sample name**
+* **Year** of collection
+* **Location** of collection
+* **Latitude** of collection
+* **Longitude** of collection
+* **Source study**
+
+In total, we have **123 samples**. Note that for some samples we have some missing data (location, year).
+
+```{r}
+gdl <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/gdl/metadata-gdl.txt") %>% select(-sample_accession)
+ols <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/old-lab-strains/metadata.txt") %>% filter(!(run_accession %in% c("SRR11846566","SRR11846567","SRR12831808")))
+museum <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/museum/metadata-museum.txt") %>% select(-sample_accession)
+```
+
+```{r}
+museum2 <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/museum/metadata-museum2.txt") %>% select(-attribution, -sra_accession)
+museum_final <- museum %>% inner_join(museum2, by="sample") %>% mutate(study="museum")
+```
+
+```{r}
+gdl_final <- gdl %>% 
+  mutate(location = case_when(startsWith(sample, "B") ~ "Beijing, China", startsWith(sample, "I") ~ "Ithaca, USA", startsWith(sample, "N") ~ "Netherlands", startsWith(sample, "T") ~ "Tasmania, Australia", startsWith(sample, "Z") ~ "Zimbabwe"), lat = case_when(startsWith(sample, "B") ~ 40, startsWith(sample, "I") ~ 42, startsWith(sample, "N") ~ 52, startsWith(sample, "T") ~ 43, startsWith(sample, "Z") ~ 19), , long = case_when(startsWith(sample, "B") ~ 116, startsWith(sample, "I") ~ 76, startsWith(sample, "N") ~ 5, startsWith(sample, "T") ~ 147, startsWith(sample, "Z") ~ 29), study="gdl")
+```
+
+```{r}
+metadata <- bind_rows(museum_final, ols, gdl_final)
+metadata
+
+write_tsv(metadata, "/Volumes/Temp1/Dmel-stealthTEs/dataset-metadata")
+```
+
