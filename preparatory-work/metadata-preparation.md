@@ -20,7 +20,8 @@ I created a **unique metadata file** for the three merged datasets we
 are going to use:
 
 - Global diversity lines (**gdl**) - 86 samples
-- Old lab strains from the Tirant paper (**tirant**, ols) - 14 samples
+- Old lab strains from the Tirant paper (**tirant**, ols) - 12 samples
+  (3 files are RNA seq)
 - Museum specimens from 1800 (**museum**) - 25 samples
 
 The file contains the following information:
@@ -33,7 +34,7 @@ The file contains the following information:
 - **Longitude** of collection
 - **Source study**
 
-In total, we have **125 samples**. Note that for some samples we have
+In total, we have **123 samples**. Note that for some samples we have
 some missing data (location, year).
 
 ``` r
@@ -49,7 +50,7 @@ gdl <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/gdl/metadata-gdl.txt") %>% selec
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ``` r
-ols <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/old-lab-strains/metadata.txt")
+ols <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/old-lab-strains/metadata.txt") %>% filter(!(run_accession %in% c("SRR11846566","SRR11846567","SRR12831808")))
 ```
 
     ## Rows: 14 Columns: 7
@@ -100,7 +101,7 @@ metadata <- bind_rows(museum_final, ols, gdl_final)
 metadata
 ```
 
-    ## # A tibble: 125 × 7
+    ## # A tibble: 123 × 7
     ##    run_accession sample year        location                     lat  long study
     ##    <chr>         <chr>  <chr>       <chr>                      <dbl> <dbl> <chr>
     ##  1 SRR23876562   H9     Mid 1800s   Passau, Germany               46    13 muse…
@@ -113,8 +114,8 @@ metadata
     ##  8 SRR23876569   H25    Mid 1800s   Passau, Germany               46    13 muse…
     ##  9 SRR23876570   H24    1933        Lund, Sweden                  56    13 muse…
     ## 10 SRR23876571   H23    1933        Lund, Sweden                  56    13 muse…
-    ## # ℹ 115 more rows
+    ## # ℹ 113 more rows
 
 ``` r
-#write_tsv(metadata, "/Volumes/Temp1/Dmel-stealthTEs/dataset-metadata")
+write_tsv(metadata, "/Volumes/Temp1/Dmel-stealthTEs/dataset-metadata")
 ```
