@@ -1,0 +1,396 @@
+---
+title: "Origin of the TEs - repeat 2"
+output: github_document
+---
+# Why Repeat 2?
+I used an older RepeatMasking library; Great now i can repeat everything with the common library
+
+# Question
+Which Drosophila species is the origin of blood, opus, 412.
+Since I address this question already for three TEs, I will extend it to all Dmel TEs.
+
+# Analyis
+## Obtain genomes
+
+```{bash eval=FALSE}
+datasets download genome accession PRJNA675888
+unzip ncbi_dataset.zip  
+mv **/*.fna .
+ll *.fna| perl -pe 's/^/#/'
+#-rw-------  1 rokofler  staff  176216895 Apr 27 03:50 GCA_018148915.1_ASM1814891v1_genomic.fna
+#-rw-------  1 rokofler  staff  187664475 Apr 27 03:50 GCA_018148935.1_ASM1814893v1_genomic.fna
+#-rw-------  1 rokofler  staff  271571590 Apr 27 03:50 GCA_018150325.1_ASM1815032v1_genomic.fna
+#-rw-------  1 rokofler  staff  224611808 Apr 27 03:51 GCA_018150345.1_ASM1815034v1_genomic.fna
+#-rw-------  1 rokofler  staff  174825568 Apr 27 03:51 GCA_018150375.1_ASM1815037v1_genomic.fna
+#-rw-------  1 rokofler  staff  144843797 Apr 27 03:51 GCA_018150405.1_ASM1815040v1_genomic.fna
+#-rw-------  1 rokofler  staff  181215218 Apr 27 03:51 GCA_018150545.1_ASM1815054v1_genomic.fna
+#-rw-------  1 rokofler  staff  183306165 Apr 27 03:51 GCA_018150695.1_ASM1815069v1_genomic.fna
+#-rw-------  1 rokofler  staff  205219446 Apr 27 03:52 GCA_018150725.1_ASM1815072v1_genomic.fna
+#-rw-------  1 rokofler  staff  192845479 Apr 27 03:52 GCA_018150735.1_ASM1815073v1_genomic.fna
+#-rw-------  1 rokofler  staff  187018448 Apr 27 03:52 GCA_018150745.1_ASM1815074v1_genomic.fna
+#-rw-------  1 rokofler  staff  183741659 Apr 27 03:52 GCA_018150835.1_ASM1815083v1_genomic.fna
+#-rw-------  1 rokofler  staff  160171722 Apr 27 03:53 GCA_018150885.1_ASM1815088v1_genomic.fna
+#-rw-------  1 rokofler  staff  163295874 Apr 27 03:53 GCA_018150905.1_ASM1815090v1_genomic.fna
+#-rw-------  1 rokofler  staff  203626573 Apr 27 03:53 GCA_018150935.1_ASM1815093v1_genomic.fna
+#-rw-------  1 rokofler  staff  319202149 Apr 27 03:54 GCA_018150985.1_ASM1815098v1_genomic.fna
+#-rw-------  1 rokofler  staff  213800680 Apr 27 03:54 GCA_018151085.1_ASM1815108v1_genomic.fna
+#-rw-------  1 rokofler  staff  202420955 Apr 27 03:55 GCA_018151095.1_ASM1815109v1_genomic.fna
+#-rw-------  1 rokofler  staff  182103017 Apr 27 03:55 GCA_018151105.1_ASM1815110v1_genomic.fna
+#-rw-------  1 rokofler  staff  173616977 Apr 27 03:55 GCA_018151165.1_ASM1815116v1_genomic.fna
+#-rw-------  1 rokofler  staff  217056643 Apr 27 03:56 GCA_018151275.1_ASM1815127v1_genomic.fna
+#-rw-------  1 rokofler  staff  260244549 Apr 27 03:56 GCA_018151315.1_ASM1815131v1_genomic.fna
+#-rw-------  1 rokofler  staff  164744743 Apr 27 03:57 GCA_018151435.1_ASM1815143v1_genomic.fna
+#-rw-------  1 rokofler  staff  151583216 Apr 27 03:57 GCA_018151445.1_ASM1815144v1_genomic.fna
+#-rw-------  1 rokofler  staff  167648437 Apr 27 03:57 GCA_018151455.1_ASM1815145v1_genomic.fna
+#-rw-------  1 rokofler  staff  175236531 Apr 27 03:58 GCA_018151655.1_ASM1815165v1_genomic.fna
+#-rw-------  1 rokofler  staff  195950575 Apr 27 03:58 GCA_018152115.1_ASM1815211v1_genomic.fna
+#-rw-------  1 rokofler  staff  180134723 Apr 27 03:58 GCA_018152125.1_ASM1815212v1_genomic.fna
+#-rw-------  1 rokofler  staff  325273507 Apr 27 03:59 GCA_018152135.1_ASM1815213v1_genomic.fna
+#-rw-------  1 rokofler  staff  165968743 Apr 27 03:59 GCA_018152165.1_ASM1815216v1_genomic.fna
+#-rw-------  1 rokofler  staff  181911110 Apr 27 04:00 GCA_018152175.1_ASM1815217v1_genomic.fna
+#-rw-------  1 rokofler  staff  170019136 Apr 27 04:00 GCA_018152265.1_ASM1815226v1_genomic.fna
+#-rw-------  1 rokofler  staff  234141655 Apr 27 04:01 GCA_018152295.1_ASM1815229v1_genomic.fna
+#-rw-------  1 rokofler  staff  180749414 Apr 27 04:01 GCA_018152505.1_ASM1815250v1_genomic.fna
+#-rw-------  1 rokofler  staff  191206214 Apr 27 04:02 GCA_018152535.1_ASM1815253v1_genomic.fna
+#-rw-------  1 rokofler  staff  167610332 Apr 27 04:02 GCA_018152695.1_ASM1815269v1_genomic.fna
+#-rw-------  1 rokofler  staff  226370756 Apr 27 04:02 GCA_018152825.1_ASM1815282v1_genomic.fna
+#-rw-------  1 rokofler  staff  185928742 Apr 27 04:03 GCA_018152915.1_ASM1815291v1_genomic.fna
+#-rw-------  1 rokofler  staff  204197530 Apr 27 04:03 GCA_018152965.1_ASM1815296v1_genomic.fna
+#-rw-------  1 rokofler  staff  196172041 Apr 27 04:04 GCA_018153035.1_ASM1815303v1_genomic.fna
+#-rw-------  1 rokofler  staff  211063837 Apr 27 04:04 GCA_018153105.1_ASM1815310v1_genomic.fna
+#-rw-------  1 rokofler  staff  190054859 Apr 27 04:05 GCA_018153145.1_ASM1815314v1_genomic.fna
+#-rw-------  1 rokofler  staff  193728445 Apr 27 04:05 GCA_018153235.1_ASM1815323v1_genomic.fna
+#-rw-------  1 rokofler  staff  193558529 Apr 27 04:05 GCA_018153275.1_ASM1815327v1_genomic.fna
+#-rw-------  1 rokofler  staff  193919755 Apr 27 04:06 GCA_018153295.1_ASM1815329v1_genomic.fna
+#-rw-------  1 rokofler  staff  209048327 Apr 27 04:06 GCA_018153305.1_ASM1815330v1_genomic.fna
+#-rw-------  1 rokofler  staff  232055431 Apr 27 04:06 GCA_018153365.1_ASM1815336v1_genomic.fna
+#-rw-------  1 rokofler  staff  185700803 Apr 27 04:07 GCA_018153375.1_ASM1815337v1_genomic.fna
+#-rw-------  1 rokofler  staff  212544181 Apr 27 04:07 GCA_018153455.1_ASM1815345v1_genomic.fna
+#-rw-------  1 rokofler  staff  188154302 Apr 27 04:07 GCA_018153465.1_ASM1815346v1_genomic.fna
+#-rw-------  1 rokofler  staff  170302559 Apr 27 04:07 GCA_018153695.1_ASM1815369v1_genomic.fna
+#-rw-------  1 rokofler  staff  165242002 Apr 27 04:08 GCA_018153725.1_ASM1815372v1_genomic.fna
+#-rw-------  1 rokofler  staff  167100171 Apr 27 04:08 GCA_018153835.1_ASM1815383v1_genomic.fna
+#-rw-------  1 rokofler  staff  194812055 Apr 27 04:08 GCA_018153845.1_ASM1815384v1_genomic.fna
+#-rw-------  1 rokofler  staff  169459122 Apr 27 04:08 GCA_018159335.1_ASM1815933v1_genomic.fna
+#-rw-------  1 rokofler  staff  128936675 Apr 27 04:08 GCA_018901795.1_ASM1890179v1_genomic.fna
+#-rw-------  1 rokofler  staff  165085232 Apr 27 04:08 GCA_018901805.1_ASM1890180v1_genomic.fna
+#-rw-------  1 rokofler  staff  150315571 Apr 27 04:09 GCA_018901815.1_ASM1890181v1_genomic.fna
+#-rw-------  1 rokofler  staff  156240209 Apr 27 04:09 GCA_018901825.1_ASM1890182v1_genomic.fna
+#-rw-------  1 rokofler  staff  139543834 Apr 27 04:09 GCA_018901835.1_ASM1890183v1_genomic.fna
+#-rw-------  1 rokofler  staff  185309707 Apr 27 04:09 GCA_018901885.1_ASM1890188v1_genomic.fna
+#-rw-------  1 rokofler  staff  147624321 Apr 27 04:10 GCA_018903395.1_ASM1890339v1_genomic.fna
+#-rw-------  1 rokofler  staff  177694154 Apr 27 04:10 GCA_018903425.1_ASM1890342v1_genomic.fna
+#-rw-------  1 rokofler  staff  307677008 Apr 27 04:10 GCA_018903435.1_ASM1890343v1_genomic.fna
+#-rw-------  1 rokofler  staff  247947370 Apr 27 04:11 GCA_018903445.1_ASM1890344v1_genomic.fna
+#-rw-------  1 rokofler  staff  239809037 Apr 27 04:11 GCA_018903485.1_ASM1890348v1_genomic.fna
+#-rw-------  1 rokofler  staff  138624237 Apr 27 04:11 GCA_018903505.1_ASM1890350v1_genomic.fna
+#-rw-------  1 rokofler  staff  252664883 Apr 27 04:11 GCA_018903575.1_ASM1890357v1_genomic.fna
+#-rw-------  1 rokofler  staff  197398631 Apr 27 04:11 GCA_018903615.1_ASM1890361v1_genomic.fna
+#-rw-------  1 rokofler  staff  154408846 Apr 27 04:11 GCA_018903625.1_ASM1890362v1_genomic.fna
+#-rw-------  1 rokofler  staff  146610489 Apr 27 04:11 GCA_018903635.1_ASM1890363v1_genomic.fna
+#-rw-------  1 rokofler  staff  168951074 Apr 27 04:11 GCA_018903675.1_ASM1890367v1_genomic.fna
+#-rw-------  1 rokofler  staff  190101763 Apr 27 04:11 GCA_018903695.1_ASM1890369v1_genomic.fna
+#-rw-------  1 rokofler  staff  158129714 Apr 27 04:11 GCA_018903715.1_ASM1890371v1_genomic.fna
+#-rw-------  1 rokofler  staff  183594675 Apr 27 04:12 GCA_018903735.1_ASM1890373v1_genomic.fna
+#-rw-------  1 rokofler  staff  156008893 Apr 27 04:12 GCA_018903745.1_ASM1890374v1_genomic.fna
+#-rw-------  1 rokofler  staff  214870662 Apr 27 04:12 GCA_018903765.1_ASM1890376v1_genomic.fna
+#-rw-------  1 rokofler  staff  215290217 Apr 27 04:13 GCA_018903935.1_ASM1890393v1_genomic.fna
+#-rw-------  1 rokofler  staff  164464428 Apr 27 04:13 GCA_018904025.1_ASM1890402v1_genomic.fna
+#-rw-------  1 rokofler  staff  209386570 Apr 27 04:13 GCA_018904035.1_ASM1890403v1_genomic.fna
+#-rw-------  1 rokofler  staff  200638434 Apr 27 04:13 GCA_018904095.1_ASM1890409v1_genomic.fna
+#-rw-------  1 rokofler  staff  167647796 Apr 27 04:14 GCA_018904105.1_ASM1890410v1_genomic.fna
+#-rw-------  1 rokofler  staff  169327323 Apr 27 04:14 GCA_018904165.1_ASM1890416v1_genomic.fna
+#-rw-------  1 rokofler  staff  343870892 Apr 27 04:14 GCA_018904225.1_ASM1890422v1_genomic.fna
+#-rw-------  1 rokofler  staff  312380123 Apr 27 04:15 GCA_018904235.1_ASM1890423v1_genomic.fna
+#-rw-------  1 rokofler  staff  380150129 Apr 27 04:15 GCA_018904265.1_ASM1890426v1_genomic.fna
+#-rw-------  1 rokofler  staff  403827490 Apr 27 04:16 GCA_018904275.1_ASM1890427v1_genomic.fna
+#-rw-------  1 rokofler  staff  422335801 Apr 27 04:17 GCA_018904285.1_ASM1890428v1_genomic.fna
+#-rw-------  1 rokofler  staff  232012362 Apr 27 04:18 GCA_018904305.1_ASM1890430v1_genomic.fna
+#-rw-------  1 rokofler  staff  155901281 Apr 27 04:18 GCA_018904325.1_ASM1890432v1_genomic.fna
+#-rw-------  1 rokofler  staff  139872934 Apr 27 04:18 GCA_018904355.1_ASM1890435v1_genomic.fna
+#-rw-------  1 rokofler  staff  146546328 Apr 27 04:19 GCA_018904365.1_ASM1890436v1_genomic.fna
+#-rw-------  1 rokofler  staff  153241101 Apr 27 04:19 GCA_018904385.1_ASM1890438v1_genomic.fna
+#-rw-------  1 rokofler  staff  135264843 Apr 27 04:19 GCA_018904415.1_ASM1890441v1_genomic.fna
+#-rw-------  1 rokofler  staff  149808744 Apr 27 04:19 GCA_018904445.1_ASM1890444v1_genomic.fna
+#-rw-------  1 rokofler  staff  151759663 Apr 27 04:19 GCA_018904455.1_ASM1890445v1_genomic.fna
+#-rw-------  1 rokofler  staff  154833712 Apr 27 04:20 GCA_018904465.1_ASM1890446v1_genomic.fna
+#-rw-------  1 rokofler  staff  131810764 Apr 27 04:20 GCA_018904475.1_ASM1890447v1_genomic.fna
+#-rw-------  1 rokofler  staff  137403873 Apr 27 04:20 GCA_018904525.1_ASM1890452v1_genomic.fna
+#-rw-------  1 rokofler  staff  199828458 Apr 27 04:20 GCA_018904595.1_ASM1890459v1_genomic.fna
+#-rw-------  1 rokofler  staff  204973549 Apr 27 04:20 GCA_018904605.1_ASM1890460v1_genomic.fna
+#-rw-------  1 rokofler  staff  187674946 Apr 27 04:21 GCF_018148935.1_ASM1814893v1_genomic.fna
+#-rw-------  1 rokofler  staff  182110972 Apr 27 04:21 GCF_018151105.1_ASM1815110v1_genomic.fna
+#-rw-------  1 rokofler  staff  195959011 Apr 27 04:21 GCF_018152115.1_ASM1815211v1_genomic.fna
+#-rw-------  1 rokofler  staff  170050142 Apr 27 04:21 GCF_018152265.1_ASM1815226v1_genomic.fna
+#-rw-------  1 rokofler  staff  180776054 Apr 27 04:21 GCF_018152505.1_ASM1815250v1_genomic.fna
+#-rw-------  1 rokofler  staff  191222827 Apr 27 04:21 GCF_018152535.1_ASM1815253v1_genomic.fna
+#-rw-------  1 rokofler  staff  167614846 Apr 27 04:21 GCF_018152695.1_ASM1815269v1_genomic.fna
+#-rw-------  1 rokofler  staff  193970815 Apr 27 04:22 GCF_018153295.1_ASM1815329v1_genomic.fna
+#-rw-------  1 rokofler  staff  165253139 Apr 27 04:22 GCF_018153725.1_ASM1815372v1_genomic.fna
+#-rw-------  1 rokofler  staff  167180017 Apr 27 04:22 GCF_018153835.1_ASM1815383v1_genomic.fna
+#-rw-------  1 rokofler  staff  194816680 Apr 27 04:22 GCF_018153845.1_ASM1815384v1_genomic.fna
+```
+
+## Rename genomes
+### Renaming list
+
+```{bash eval=FALSE}
+join -1 1 -2 1 filenames-sort specids-sor t| awk '{print $2,$3}' | perl -pe 's/^/#/'
+#GCA_018148915.1_ASM1814891v1_genomic.fna D.ananassae
+#GCA_018148935.1_ASM1814893v1_genomic.fna D.biarmipes
+#GCA_018150325.1_ASM1815032v1_genomic.fna D.subpulchrella
+#GCA_018150345.1_ASM1815034v1_genomic.fna D.equinoxialis
+#GCA_018150375.1_ASM1815037v1_genomic.fna D.sturtevanti
+#GCA_018150405.1_ASM1815040v1_genomic.fna D.varians
+#GCA_018150545.1_ASM1815054v1_genomic.fna D.ercepeae
+#GCA_018150695.1_ASM1815069v1_genomic.fna D.oshimai
+#GCA_018150725.1_ASM1815072v1_genomic.fna D.quadrilineata
+#GCA_018150735.1_ASM1815073v1_genomic.fna D.sp.14030-0761.01
+#GCA_018150745.1_ASM1815074v1_genomic.fna D.sucinea
+#GCA_018150835.1_ASM1815083v1_genomic.fna D.repletoides
+#GCA_018150885.1_ASM1815088v1_genomic.fna D.tristis
+#GCA_018150905.1_ASM1815090v1_genomic.fna D.ambigua
+#GCA_018150935.1_ASM1815093v1_genomic.fna D.pruinosa
+#GCA_018150985.1_ASM1815098v1_genomic.fna C.costata
+#GCA_018151085.1_ASM1815108v1_genomic.fna D.tropicalis
+#GCA_018151095.1_ASM1815109v1_genomic.fna D.triauraria
+#GCA_018151105.1_ASM1815110v1_genomic.fna D.obscura
+#GCA_018151165.1_ASM1815116v1_genomic.fna D.arawakana
+#GCA_018151275.1_ASM1815127v1_genomic.fna D.prosaltans
+#GCA_018151315.1_ASM1815131v1_genomic.fna D.paulistorum.12
+#GCA_018151435.1_ASM1815143v1_genomic.fna Z.africanus
+#GCA_018151445.1_ASM1815144v1_genomic.fna Z.inermis
+#GCA_018151455.1_ASM1815145v1_genomic.fna Z.tsacasi.car7
+#GCA_018151655.1_ASM1815165v1_genomic.fna D.bocqueti
+#GCA_018152115.1_ASM1815211v1_genomic.fna D.rhopaloa
+#GCA_018152125.1_ASM1815212v1_genomic.fna D.dunni
+#GCA_018152135.1_ASM1815213v1_genomic.fna D.paulistorum.06
+#GCA_018152165.1_ASM1815216v1_genomic.fna D.immigrans.k17
+#GCA_018152175.1_ASM1815217v1_genomic.fna D.jambulina
+#GCA_018152265.1_ASM1815226v1_genomic.fna D.ficusphila
+#GCA_018152295.1_ASM1815229v1_genomic.fna D.carrolli
+#GCA_018152505.1_ASM1815250v1_genomic.fna D.elegans
+#GCA_018152535.1_ASM1815253v1_genomic.fna D.kikkawai
+#GCA_018152695.1_ASM1815269v1_genomic.fna D.takahashii
+#GCA_018152825.1_ASM1815282v1_genomic.fna S.hsui
+#GCA_018152915.1_ASM1815291v1_genomic.fna D.americana
+#GCA_018152965.1_ASM1815296v1_genomic.fna S.pallida
+#GCA_018153035.1_ASM1815303v1_genomic.fna D.pseuan.pseuan.
+#GCA_018153105.1_ASM1815310v1_genomic.fna D.rufa
+#GCA_018153145.1_ASM1815314v1_genomic.fna D.pseuan.nigrens
+#GCA_018153235.1_ASM1815323v1_genomic.fna D.mal.mal.
+#GCA_018153275.1_ASM1815327v1_genomic.fna D.mal.pallens
+#GCA_018153295.1_ASM1815329v1_genomic.fna D.grimshawi
+#GCA_018153305.1_ASM1815330v1_genomic.fna D.kurseongensis
+#GCA_018153365.1_ASM1815336v1_genomic.fna D.fuyamai
+#GCA_018153375.1_ASM1815337v1_genomic.fna D.immigrans.12
+#GCA_018153455.1_ASM1815345v1_genomic.fna D.parabipectinata
+#GCA_018153465.1_ASM1815346v1_genomic.fna D.willistoni.00
+#GCA_018153695.1_ASM1815369v1_genomic.fna D.virilis
+#GCA_018153725.1_ASM1815372v1_genomic.fna D.mojavensis
+#GCA_018153835.1_ASM1815383v1_genomic.fna D.eugracilis
+#GCA_018153845.1_ASM1815384v1_genomic.fna D.bipectinata
+#GCA_018159335.1_ASM1815933v1_genomic.fna Z.indianus.D18
+#GCA_018901795.1_ASM1890179v1_genomic.fna D.sp.st01m
+#GCA_018901805.1_ASM1890180v1_genomic.fna Z.taronus
+#GCA_018901815.1_ASM1890181v1_genomic.fna Z.lachaisei
+#GCA_018901825.1_ASM1890182v1_genomic.fna D.funebris
+#GCA_018901835.1_ASM1890183v1_genomic.fna S.graminum
+#GCA_018901885.1_ASM1890188v1_genomic.fna Z.kolodkinae
+#GCA_018903395.1_ASM1890339v1_genomic.fna Z.indianus.V01
+#GCA_018903425.1_ASM1890342v1_genomic.fna Z.nigranus
+#GCA_018903435.1_ASM1890343v1_genomic.fna L.varia
+#GCA_018903445.1_ASM1890344v1_genomic.fna D.willistoni.17
+#GCA_018903485.1_ASM1890348v1_genomic.fna D.littoralis
+#GCA_018903505.1_ASM1890350v1_genomic.fna D.subobscura
+#GCA_018903575.1_ASM1890357v1_genomic.fna D.saltans
+#GCA_018903615.1_ASM1890361v1_genomic.fna D.neocordata
+#GCA_018903625.1_ASM1890362v1_genomic.fna D.teissieri.273.3
+#GCA_018903635.1_ASM1890363v1_genomic.fna D.teissieri.ct02
+#GCA_018903675.1_ASM1890367v1_genomic.fna Z.capensis
+#GCA_018903695.1_ASM1890369v1_genomic.fna Z.gabonicus
+#GCA_018903715.1_ASM1890371v1_genomic.fna Z.davidi
+#GCA_018903735.1_ASM1890373v1_genomic.fna D.cardini
+#GCA_018903745.1_ASM1890374v1_genomic.fna D.repleta
+#GCA_018903765.1_ASM1890376v1_genomic.fna D.aff.chauv.
+#GCA_018903935.1_ASM1890393v1_genomic.fna D.insularis
+#GCA_018904025.1_ASM1890402v1_genomic.fna Z.vittiger
+#GCA_018904035.1_ASM1890403v1_genomic.fna Z.ornatus
+#GCA_018904095.1_ASM1890409v1_genomic.fna Z.ghesquierei
+#GCA_018904105.1_ASM1890410v1_genomic.fna Z.tsacasi.jd01t
+#GCA_018904165.1_ASM1890416v1_genomic.fna Z.camerounensis
+#GCA_018904225.1_ASM1890422v1_genomic.fna L.mommai
+#GCA_018904235.1_ASM1890423v1_genomic.fna L.stackelbergi
+#GCA_018904265.1_ASM1890426v1_genomic.fna L.collinella
+#GCA_018904275.1_ASM1890427v1_genomic.fna L.clarofinis
+#GCA_018904285.1_ASM1890428v1_genomic.fna L.magnipectinata
+#GCA_018904305.1_ASM1890430v1_genomic.fna S.montana
+#GCA_018904325.1_ASM1890432v1_genomic.fna D.murphyi
+#GCA_018904355.1_ASM1890435v1_genomic.fna D.sproati
+#GCA_018904365.1_ASM1890436v1_genomic.fna D.melanogaster
+#GCA_018904385.1_ASM1890438v1_genomic.fna D.yakuba
+#GCA_018904415.1_ASM1890441v1_genomic.fna D.simulans
+#GCA_018904445.1_ASM1890444v1_genomic.fna D.sechellia
+#GCA_018904455.1_ASM1890445v1_genomic.fna D.pseudoobscura
+#GCA_018904465.1_ASM1890446v1_genomic.fna D.persimilis
+#GCA_018904475.1_ASM1890447v1_genomic.fna D.mauritiana
+#GCA_018904525.1_ASM1890452v1_genomic.fna D.erecta
+#GCA_018904595.1_ASM1890459v1_genomic.fna Z.indianus.R04
+#GCA_018904605.1_ASM1890460v1_genomic.fna Z.indianus.BS02
+```
+
+### Create the renaming bash script
+
+** NOTE ** Also converts all characters into upper case; Just to be sure, I want to avoid RepeatMasker issues that something may not be masked because it is already masked (lower case means masked)
+
+First the code of the renamer.py; this python script generates a bash script
+```{Python eval=FALSE}
+import sys
+output="/Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes"
+ct="fasta-reader.py {0} | fasta-formatter.py --upper |fasta-writter.py > {1}/{2}"
+
+for name in sys.stdin:
+	ifile,ofile =name.rstrip("\n").split(" ")
+	com=ct.format(ifile,output,ofile)
+	print(com)%
+```
+
+than the resulting bash file
+```{bash eval=FALSE}
+[0,8258]rokofler%cat rename.txt|python renamer.py
+fasta-reader.py GCA_018148915.1_ASM1814891v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.ananassae
+fasta-reader.py GCA_018148935.1_ASM1814893v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.biarmipes
+fasta-reader.py GCA_018150325.1_ASM1815032v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.subpulchrella
+fasta-reader.py GCA_018150345.1_ASM1815034v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.equinoxialis
+fasta-reader.py GCA_018150375.1_ASM1815037v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.sturtevanti
+fasta-reader.py GCA_018150405.1_ASM1815040v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.varians
+fasta-reader.py GCA_018150545.1_ASM1815054v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.ercepeae
+fasta-reader.py GCA_018150695.1_ASM1815069v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.oshimai
+fasta-reader.py GCA_018150725.1_ASM1815072v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.quadrilineata
+fasta-reader.py GCA_018150735.1_ASM1815073v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.sp.14030-0761.01
+fasta-reader.py GCA_018150745.1_ASM1815074v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.sucinea
+fasta-reader.py GCA_018150835.1_ASM1815083v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.repletoides
+fasta-reader.py GCA_018150885.1_ASM1815088v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.tristis
+fasta-reader.py GCA_018150905.1_ASM1815090v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.ambigua
+fasta-reader.py GCA_018150935.1_ASM1815093v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.pruinosa
+fasta-reader.py GCA_018150985.1_ASM1815098v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/C.costata
+fasta-reader.py GCA_018151085.1_ASM1815108v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.tropicalis
+fasta-reader.py GCA_018151095.1_ASM1815109v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.triauraria
+fasta-reader.py GCA_018151105.1_ASM1815110v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.obscura
+fasta-reader.py GCA_018151165.1_ASM1815116v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.arawakana
+fasta-reader.py GCA_018151275.1_ASM1815127v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.prosaltans
+fasta-reader.py GCA_018151315.1_ASM1815131v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.paulistorum.12
+fasta-reader.py GCA_018151435.1_ASM1815143v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.africanus
+fasta-reader.py GCA_018151445.1_ASM1815144v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.inermis
+fasta-reader.py GCA_018151455.1_ASM1815145v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.tsacasi.car7
+fasta-reader.py GCA_018151655.1_ASM1815165v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.bocqueti
+fasta-reader.py GCA_018152115.1_ASM1815211v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.rhopaloa
+fasta-reader.py GCA_018152125.1_ASM1815212v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.dunni
+fasta-reader.py GCA_018152135.1_ASM1815213v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.paulistorum.06
+fasta-reader.py GCA_018152165.1_ASM1815216v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.immigrans.k17
+fasta-reader.py GCA_018152175.1_ASM1815217v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.jambulina
+fasta-reader.py GCA_018152265.1_ASM1815226v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.ficusphila
+fasta-reader.py GCA_018152295.1_ASM1815229v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.carrolli
+fasta-reader.py GCA_018152505.1_ASM1815250v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.elegans
+fasta-reader.py GCA_018152535.1_ASM1815253v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.kikkawai
+fasta-reader.py GCA_018152695.1_ASM1815269v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.takahashii
+fasta-reader.py GCA_018152825.1_ASM1815282v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/S.hsui
+fasta-reader.py GCA_018152915.1_ASM1815291v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.americana
+fasta-reader.py GCA_018152965.1_ASM1815296v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/S.pallida
+fasta-reader.py GCA_018153035.1_ASM1815303v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.pseuan.pseuan.
+fasta-reader.py GCA_018153105.1_ASM1815310v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.rufa
+fasta-reader.py GCA_018153145.1_ASM1815314v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.pseuan.nigrens
+fasta-reader.py GCA_018153235.1_ASM1815323v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.mal.mal.
+fasta-reader.py GCA_018153275.1_ASM1815327v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.mal.pallens
+fasta-reader.py GCA_018153295.1_ASM1815329v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.grimshawi
+fasta-reader.py GCA_018153305.1_ASM1815330v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.kurseongensis
+fasta-reader.py GCA_018153365.1_ASM1815336v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.fuyamai
+fasta-reader.py GCA_018153375.1_ASM1815337v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.immigrans.12
+fasta-reader.py GCA_018153455.1_ASM1815345v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.parabipectinata
+fasta-reader.py GCA_018153465.1_ASM1815346v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.willistoni.00
+fasta-reader.py GCA_018153695.1_ASM1815369v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.virilis
+fasta-reader.py GCA_018153725.1_ASM1815372v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.mojavensis
+fasta-reader.py GCA_018153835.1_ASM1815383v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.eugracilis
+fasta-reader.py GCA_018153845.1_ASM1815384v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.bipectinata
+fasta-reader.py GCA_018159335.1_ASM1815933v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.indianus.D18
+fasta-reader.py GCA_018901795.1_ASM1890179v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.sp.st01m
+fasta-reader.py GCA_018901805.1_ASM1890180v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.taronus
+fasta-reader.py GCA_018901815.1_ASM1890181v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.lachaisei
+fasta-reader.py GCA_018901825.1_ASM1890182v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.funebris
+fasta-reader.py GCA_018901835.1_ASM1890183v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/S.graminum
+fasta-reader.py GCA_018901885.1_ASM1890188v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.kolodkinae
+fasta-reader.py GCA_018903395.1_ASM1890339v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.indianus.V01
+fasta-reader.py GCA_018903425.1_ASM1890342v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.nigranus
+fasta-reader.py GCA_018903435.1_ASM1890343v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/L.varia
+fasta-reader.py GCA_018903445.1_ASM1890344v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.willistoni.17
+fasta-reader.py GCA_018903485.1_ASM1890348v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.littoralis
+fasta-reader.py GCA_018903505.1_ASM1890350v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.subobscura
+fasta-reader.py GCA_018903575.1_ASM1890357v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.saltans
+fasta-reader.py GCA_018903615.1_ASM1890361v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.neocordata
+fasta-reader.py GCA_018903625.1_ASM1890362v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.teissieri.273.3
+fasta-reader.py GCA_018903635.1_ASM1890363v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.teissieri.ct02
+fasta-reader.py GCA_018903675.1_ASM1890367v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.capensis
+fasta-reader.py GCA_018903695.1_ASM1890369v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.gabonicus
+fasta-reader.py GCA_018903715.1_ASM1890371v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.davidi
+fasta-reader.py GCA_018903735.1_ASM1890373v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.cardini
+fasta-reader.py GCA_018903745.1_ASM1890374v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.repleta
+fasta-reader.py GCA_018903765.1_ASM1890376v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.aff.chauv.
+fasta-reader.py GCA_018903935.1_ASM1890393v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.insularis
+fasta-reader.py GCA_018904025.1_ASM1890402v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.vittiger
+fasta-reader.py GCA_018904035.1_ASM1890403v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.ornatus
+fasta-reader.py GCA_018904095.1_ASM1890409v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.ghesquierei
+fasta-reader.py GCA_018904105.1_ASM1890410v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.tsacasi.jd01t
+fasta-reader.py GCA_018904165.1_ASM1890416v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.camerounensis
+fasta-reader.py GCA_018904225.1_ASM1890422v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/L.mommai
+fasta-reader.py GCA_018904235.1_ASM1890423v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/L.stackelbergi
+fasta-reader.py GCA_018904265.1_ASM1890426v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/L.collinella
+fasta-reader.py GCA_018904275.1_ASM1890427v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/L.clarofinis
+fasta-reader.py GCA_018904285.1_ASM1890428v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/L.magnipectinata
+fasta-reader.py GCA_018904305.1_ASM1890430v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/S.montana
+fasta-reader.py GCA_018904325.1_ASM1890432v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.murphyi
+fasta-reader.py GCA_018904355.1_ASM1890435v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.sproati
+fasta-reader.py GCA_018904365.1_ASM1890436v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.melanogaster
+fasta-reader.py GCA_018904385.1_ASM1890438v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.yakuba
+fasta-reader.py GCA_018904415.1_ASM1890441v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.simulans
+fasta-reader.py GCA_018904445.1_ASM1890444v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.sechellia
+fasta-reader.py GCA_018904455.1_ASM1890445v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.pseudoobscura
+fasta-reader.py GCA_018904465.1_ASM1890446v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.persimilis
+fasta-reader.py GCA_018904475.1_ASM1890447v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.mauritiana
+fasta-reader.py GCA_018904525.1_ASM1890452v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/D.erecta
+fasta-reader.py GCA_018904595.1_ASM1890459v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.indianus.R04
+fasta-reader.py GCA_018904605.1_ASM1890460v1_genomic.fna | fasta-formatter.py --upper |fasta-writter.py > /Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/raw/genomes/Z.indianus.BS02
+```
+**Execute -> pipe into zsh**
+
+```{bash eval=FALSE}
+cat rename/rename.txt|python rename/renamer.py|zsh 
+```
+
+### Prepare Repeat Library
+Get rid of the single-copy-genes
+```{bash eval=FALSE}
+fasta-reader.py teseqs-3scg-dmel.fasta | grep -v Dmel | fasta-writter.py > ../2023-04-origin-101-genomes-ro-2/teseqs.fasta    
+# how many TEs are left
+cat ../2023-04-origin-101-genomes-ro/teseqs.fasta|grep '^>'|wc
+#     180     180    1438
+```
+Content of the repeat libary:
+```{bash eval=FALSE}
+cat ../2023-04-origin-101-genomes-ro/teseqs.fasta|grep '^>'|perl -pe 's/>//'|perl -pe 's/\n/ /g'
+#M14653 DME9736 DMIS176 DMTN1731 DMIS297 DM23420 412 DMAURA DMBARI1 BS DMU89994 DMCOPIA DMW1DOC F FB DMTNFB 
+#DMREPG DMGYPF1A DMHFL1 DMTHB1 DM06920 DMIFACA DMLINEJA DMTRDNA DMRTMGD1 DMMDG3 DMDM11 PPI251 DMPOGOR11 DMRER1DM 
+#DMRER2DM DM33463 SPRINGER TARTC AY561850 DM14101 TIRANT DMBLPP OPUS DM_ROO BLOOD DMZAM DME010298 ROXELEMENT 
+#AF222049 CIRC DME278684 RT1B QUASIMODO Beagle Tinker TABOR STALKER INE1 GTWIN GYPSY2 ACCORD 1360 GYPSY3 INVADER 
+#INVADER2 INVADER3 G2 DMCR1A TC1 DOC2 DOC3 IVK RT1C GYPSY4 INVADER4 BAGGINS G3 MARINER2 TRANSIB1 TRANSIB3 TRANSIB2 
+#GYPSY5 GYPSY6 INVADER5 DIVER2 TRANSIB4 S2 DM88 JUAN FROGGER ROVER DMTOM1_LTR G5_DM G4_DM ROOA_LTR JOCKEY2 G6_DM 
+#LOOPER1_DM AF418572 QBERT McCLINTOCK STALKER4 HOPPER2 STALKER2 STALKER3 AF541951 DME487856 BS3 BS4 DOC4 DOC5 FW2 FW3 
+#HELITRON1_DM R1-2 TC1-2 G5A G7 GYPSY7 GYPSY8 GYPSY9 GYPSY10 GYPSY11 GYPSY12 INVADER6 DNTOMRETA DH14600 DVRPPDV DBU133521 
+#DK29466 DMMAR DHMINOS DFU309320 U73803 DSV28T24 DHUHUH3 DSRN DV26847 DV49102 DVULYSS AF056940 AF009439 DMTRAM DMTRIM TV1 
+#SPOCK WORF VEGE MAR HEL P_T P_O P_M SGM DDBARI1 TC3 Beagle2 DPSEMINIME Q BUT1 BUT2 BUT3 BUT4 BUT5 BUT6 ISBU1 ISBU2 ISBU3 
+#NEWTON GALILEO KEPLER YAKHETA TARTVIR HETAVIR TARTYAK NEOR1A TAKR1A2 MERCR1A3 NETR1B GEM VIRUVIR DTEII OSV TAHRE
+```
+
+## RepeatMask them all
+```{bash eval=FALSE}
+for i in *.fa; do RepeatMasker -pa 20 -no_is -s -nolow -dir out -lib repeatlibrary/teseqs.fasta $i;done  
+```
