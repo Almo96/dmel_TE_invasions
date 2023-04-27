@@ -4,12 +4,11 @@ output: rmarkdown::github_document
 editor_options: 
   markdown: 
     wrap: sentence
-    author: Riccardo
+    author: Riccardo & Almorò
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = '/Users/rpianezza/TE/')
 ```
 
 ```{r}
@@ -54,9 +53,26 @@ Both the ftp and the expected md5 can be found in the ENA website report for the
 
 To be consistent with further analysis across all the samples, we decided to **trim** the reads of all the files to a length of **100 bp**. This threshold was decided after careful analysis of the read length distribution in all the samples.
 
-Command for reads trimming:
+Before starting the trimming we measured the length distribution of every sample with the following command:
+```
+for FILE in *; do gzip -cd $FILE|awk '{print $1}'|paste - - - -|awk '{print length($2)}'|sort|uniq -c > $FILE.txt; done
 ```
 
+
+Then we trimmed all the reads to 100nt and we discarded all the reads under 100nt:
+```
+ls *gz | parallel -j 4 'gzip -cd {} | cut -c-100 | awk "NR%4==2 && length(\$0)>=100{print prev; print \$0; getline; print \$0; getline; print \$0} {prev=\$0}" | gzip -c > trimmed/{}'
+```
+[GNU Parallel](https://doi.org/10.5281/zenodo.7761866) was used to parallelize the process, making it faster.
+
+
+After trimming we controlled the read length distribution of the trimmed files using the previous command, the expected output of
+this control is to have all the reads at 100nt, with the total number of reads in the trimmed files equal to the sum of all the reads with more than 100nt in the original files.
+
+The two trimmed fastq files for sample are then merge because deviaTE analysis only takes single reads as input, to merge the two
+files we used the following command:
+```
+find . -name '*_1.fastq.gz' | parallel -j4 'n={}; n=${n%_1.fastq.gz}; gzip -cd {} ${n}_2.fastq.gz | gzip -c > merged/${n}.fastq.gz'
 ```
 
 
