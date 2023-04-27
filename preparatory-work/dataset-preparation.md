@@ -73,10 +73,13 @@ under 100nt:
 parallelize the process, making it faster.
 
 After trimming we controlled the read length distribution of the trimmed
-files using the previous command, the expected output of this control is
-to have all the reads at 100nt, with the total number of reads in the
-trimmed files equal to the sum of all the reads with more than 100nt in
-the original files.
+files using the previous command, this time with parallelization to
+speed it up, the expected output of this control is to have all the
+reads at 100nt, with the total number of reads in the trimmed files
+equal to the sum of all the reads with more than 100nt in the original
+files.
+
+    ls * | parallel --jobs 10 'gzip -cd {} | awk "{print \$1}" | paste - - - - | awk "{print length(\$2)}" | sort | uniq -c > length_post_trimming/museum_post_trimming_length/{}.txt'
 
 The two trimmed fastq files for sample are then merge because deviaTE
 analysis only takes single reads as input, to merge the two files we
