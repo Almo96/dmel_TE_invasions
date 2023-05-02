@@ -246,9 +246,9 @@ join -1 1 -2 1 filenames-sort specids-sor t| awk '{print $2,$3}' | perl -pe 's/^
 
 ### Create the renaming bash script
 
-\*\* NOTE \*\* Also converts all characters into upper case; Just to be
-sure, I want to avoid RepeatMasker issues that something may not be
-masked because it is already masked (lower case means masked)
+**NOTE** Also converts all characters into upper case; Just to be sure,
+I want to avoid RepeatMasker issues that something may not be masked
+because it is already masked (lower case means masked)
 
 First the code of the renamer.py; this python script generates a bash
 script
@@ -407,6 +407,18 @@ cat ../2023-04-origin-101-genomes-ro/teseqs.fasta|grep '^>'|perl -pe 's/>//'|per
 
 ## RepeatMask them all
 
+Executed on vetgrid27
+
 ``` bash
 for i in *.fa; do RepeatMasker -pa 20 -no_is -s -nolow -dir out -lib repeatlibrary/teseqs.fasta $i;done  
 ```
+
+## Merge the repeatmasked files and append file name at the end
+
+Executed on vetgrid27
+
+``` bash
+awk '{print $0,FILENAME}' *.ori.out|perl -pe 's/\.fa\.ori\.out//' >merged-101.ori.out 
+```
+
+Then transfer to my iMac with sftp
