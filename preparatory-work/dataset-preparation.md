@@ -5,22 +5,22 @@ Dataset preparation
 library(tidyverse)
 ```
 
-    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-    ## ✔ dplyr     1.1.1     ✔ readr     2.1.4
-    ## ✔ forcats   1.0.0     ✔ stringr   1.5.0
-    ## ✔ ggplot2   3.4.2     ✔ tibble    3.2.1
-    ## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-    ## ✔ purrr     1.0.1     
+    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+
+    ## ✔ ggplot2 3.4.0     ✔ purrr   0.3.4
+    ## ✔ tibble  3.1.7     ✔ dplyr   1.0.9
+    ## ✔ tidyr   1.2.0     ✔ stringr 1.4.0
+    ## ✔ readr   2.1.2     ✔ forcats 0.5.1
+
     ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
-    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 
 The dataset we are going to use for our analysis is composed by:
 
-- Global diversity lines (**gdl**) - 86 samples
-- Old lab strains from the Tirant paper (**tirant**, ols) - 14 samples
-- Museum specimens from 1800 (**museum**) - 25 samples
+-   Global diversity lines (**gdl**) - 86 samples
+-   Old lab strains from the Tirant paper (**tirant**, ols) - 14 samples
+-   Museum specimens from 1800 (**museum**) - 25 samples
 
 In total, we have **125 samples**.
 
@@ -33,9 +33,9 @@ the dataset.
 The files were downloaded in *FASTQ.gz* format from the ENA website
 using **wget**. The accession numbers are:
 
-- PRJNA268111 (**gdl**)
-- PRJNA634847 (**tirant**)
-- PRJNA945389 (**museum**)
+-   PRJNA268111 (**gdl**)
+-   PRJNA634847 (**tirant**)
+-   PRJNA945389 (**museum**)
 
 Example of the wget command, with the file *ftp.txt* containing all the
 ftp addresses for the files, one in each line.
@@ -59,7 +59,33 @@ decided to **trim** the reads of all the files to a length of **100
 bp**. This threshold was decided after careful analysis of the read
 length distribution in all the samples.
 
-Command for reads trimming:
+Before starting the trimming we measured the length distribution of
+every sample with the following command:
+
+    for FILE in *; do gzip -cd $FILE|awk '{print $1}'|paste - - - -|awk '{print length($2)}'|sort|uniq -c > $FILE.txt; done
+
+Then we trimmed all the reads to 100nt and we discarded all the reads
+under 100nt:
+
+    ls *gz | parallel -j 4 'gzip -cd {} | cut -c-100 | awk "NR%4==2 && length(\$0)>=100{print prev; print \$0; getline; print \$0; getline; print \$0} {prev=\$0}" | gzip -c > trimmed/{}'
+
+[GNU Parallel](https://doi.org/10.5281/zenodo.7761866) was used to
+parallelize the process, making it faster.
+
+After trimming we controlled the read length distribution of the trimmed
+files using the previous command, this time with parallelization to
+speed it up, the expected output of this control is to have all the
+reads at 100nt, with the total number of reads in the trimmed files
+equal to the sum of all the reads with more than 100nt in the original
+files.
+
+    ls * | parallel --jobs 10 'gzip -cd {} | awk "{print \$1}" | paste - - - - | awk "{print length(\$2)}" | sort | uniq -c > length_post_trimming/museum_post_trimming_length/{}.txt'
+
+The two trimmed fastq files for sample are then merge because deviaTE
+analysis only takes single reads as input, to merge the two files we
+used the following command:
+
+    find . -name '*_1.fastq.gz' | parallel -j4 'n={}; n=${n%_1.fastq.gz}; gzip -cd {} ${n}_2.fastq.gz | gzip -c > merged/${n}.fastq.gz'
 
 ## Mapping to reference library (bam files)
 
