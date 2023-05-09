@@ -1,0 +1,145 @@
+---
+title: "PCA-UMAP - Dmel Stealth Invasions"
+output: rmarkdown::github_document
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = '/Users/rpianezza/TE/')
+```
+
+In this script I will try to detect any signal of population structure in the sequences of the interesting TEs. To filter the SNPs, I used the script *mpileup2PCA.py*.
+
+## Filtering strategy
+
+For a position to be selected as "SNP", it must have at least 2 alleles which are present in at least *n* samples with a frequency above *m*.
+In the script, *n* and *m* are the two parameters to be specified as arguments: **min-count** and **min-freq**.
+
+The idea behind is to select only alleles which are present in a relevant fraction of TE insertions in an individual (frequency threshold), and these insertions with these alleles must be shared among at least few individuals (to select population specific alleles).
+
+
+## Metadata
+
+For detecting population structure, we focus on **GDL** samples, cause old samples without TEs are not interesting in this context and would only hide potential structure within modern populations.
+
+```{r}
+library(tidyverse)
+library(ggpubr)
+library(umap)
+
+theme_set(theme_bw())
+
+full_meta <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/dataset-metadata")
+
+meta <- full_meta %>% select(run_accession, location, study, estimated_year) %>% rename(ID = "run_accession")
+
+meta %>% filter(study=="gdl") %>% group_by(location) %>% summarise(count = n())
+```
+
+## PCA and UMAP functions
+
+```{r}
+PCA <- function(af, metadata, titlee){
+  
+  full_dataset <- inner_join(metadata, af, by="ID") %>% distinct() %>% type_convert() %>% filter(study=="gdl")
+  pcaable <- full_dataset %>% select_if(~ !all(. == .[1]))
+  pca_result <- prcomp(pcaable[, -c(1:4)], center = TRUE, scale = TRUE)
+  var_explained <- pca_result$sdev^2/sum(pca_result$sdev^2)
+  
+  plot <- ggplot(data.frame(pca_result$x, ID=full_dataset$ID, location=full_dataset$location, year=full_dataset$estimated_year, study=full_dataset$study), aes(x=PC1,y=PC2, color=location)) + geom_point(size=2) + labs(x=paste0("PC1: ",round(var_explained[1]*100,1),"%"), y=paste0("PC2: ",round(var_explained[2]*100,1),"%"), color="Location") + ggtitle(titlee) + theme(plot.title = element_text(hjust = 0.5, face = "bold"), legend.title = element_text(face = "bold"))
+plot
+}
+
+UMAP <- function(af, metadata, titlee){
+  
+  full_dataset <- inner_join(metadata, af, by="ID") %>% distinct() %>% type_convert() %>% filter(study=="gdl")
+  pcaable <- full_dataset %>% select_if(~ !all(. == .[1]))
+  umappable <- as.matrix(pcaable[, -c(1:4)])
+  umap_result <- umap(umappable, n_neighbors = 8, min_dist = 0.3)
+  umap <- umap_result$layout %>% as.data.frame() %>% rename(UMAP1="V1",UMAP2="V2")
+  
+  plot <- umap %>% ggplot(aes(x = UMAP1, y = UMAP2, color = full_dataset$location)) +
+  geom_point(size=2)+ labs(x = "UMAP1", y = "UMAP2", title = titlee, color = "Location") + theme(plot.title = element_text(hjust = 0.5, face = "bold"), legend.title = element_text(face = "bold"))
+  plot
+}
+```
+
+## TIRANT (For benchmarking)
+
+Parameters used for TIRANT:
+
+* min-freq 0.4
+* min-count 15
+
+To detect the population structure reported in Schwarz *et al* on Tirant SNPs, we had to play a bit with the parameters to call the SNPs. In particular, the SNPs that make Tasmanian flies clustering on their own are apparently very high in frequency (>0.4). For the other TEs, this was not necessary (0.2 was enough).
+
+```{r tirant}
+(tirant <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/PCA/tirant/cleaned.PCAable"))
+tirant$ID <- str_remove(tirant$ID, "\\.cleaned$")
+#tirant %>% inner_join(meta) %>% group_by(study) %>% summarise(count = n())
+#meta %>% group_by(study) %>% summarise(count = n())
+
+PCA(tirant, meta, "Tirant")
+UMAP(tirant, meta, "Tirant")
+```
+
+## 412 (Case test 1)
+
+Parameters used for 412:
+
+* min-freq 0.2
+* min-count 10
+
+```{r 412}
+(TE412 <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/PCA/412/cleaned.PCAable"))
+TE412$ID <- str_remove(TE412$ID, "\\.cleaned$")
+PCA(TE412, meta, "412")
+UMAP(TE412, meta, "412")
+```
+
+# BLOOD (Case test 2)
+
+Parameters used for BLOOD:
+
+* min-freq 0.2
+* min-count 10
+
+```{r BLOOD}
+(BLOOD <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/PCA/BLOOD/cleaned.PCAable"))
+BLOOD$ID <- str_remove(BLOOD$ID, "\\.cleaned$")
+PCA(BLOOD, meta, "BLOOD")
+UMAP(BLOOD, meta, "BLOOD")
+```
+
+## OPUS (Case test 3)
+
+Parameters used for OPUS:
+
+* min-freq 0.2
+* min-count 10
+
+```{r OPUS}
+(OPUS <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/PCA/OPUS/cleaned.PCAable"))# %>% filter(ID!="SRR1663549.cleaned"))
+OPUS$ID <- str_remove(OPUS$ID, "\\.cleaned$")
+PCA(OPUS, meta, "OPUS")
+UMAP(OPUS, meta, "OPUS")
+```
+
+
+
+# MARINER2 (Old TE as control)
+
+Parameters used for MARINER2:
+
+* min-freq 0.2
+* min-count 10
+
+```{r MARINER2}
+(MARINER2 <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/PCA/MARINER2/cleaned.PCAable"))
+MARINER2$ID <- str_remove(MARINER2$ID, "\\.cleaned$")
+PCA(MARINER2, meta, "MARINER2")
+UMAP(MARINER2, meta, "MARINER2")
+```
