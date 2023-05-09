@@ -11,7 +11,7 @@ output: github_document
 #  Dmel subgroup https://en.wikipedia.org/wiki/Drosophila_melanogaster_species_subgroup
 sortorder<-c( 
       # melanogaster group
-      "D.melanogaster","D.simulans","D.mauritiana","D.sechellia", "D.yakuba", "D.teissieri.273.3","D.teissieri.ct02","D.erecta", # melanogaster subgroup
+      "D.mel.Iso1","D.mel.Pi2","D.sim.006","D.sim.SZ232","D.mauritiana","D.sechellia", "D.yakuba", "D.teissieri.273.3","D.teissieri.ct02","D.erecta", # melanogaster subgroup
       "D.eugracilis", "D.subpulchrella", "D.biarmipes", "D.takahashii", "D.ficusphila", # several subroups
       "D.carrolli", "D.rhopaloa","D.kurseongensis", "D.fuyamai", #  rhopaloa subgroup
       "D.elegans", "D.oshimai", # elegans + suzuki subgroups
@@ -61,7 +61,7 @@ sortorder<-c(
 library(tidyverse)
 theme_set(theme_bw())
 
-h<-read.table("/Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/te-species-score.txt",header=F)
+h<-read.table("/Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/te-species-score-103.txt",header=F)
 names(h)<-c("te","species","score")
 h$spec <- factor(h$spec, levels=sortorder)
 

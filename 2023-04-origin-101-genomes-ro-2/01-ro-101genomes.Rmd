@@ -391,7 +391,7 @@ cat ../2023-04-origin-101-genomes-ro/teseqs.fasta|grep '^>'|perl -pe 's/>//'|per
 ```
 
 ## RepeatMask them all
-Executed on vetgrid27
+Executed on vetgrid27;  RepeatMasker version open-4.0.7
 ```{bash eval=FALSE}
 for i in *.fa; do RepeatMasker -pa 20 -no_is -s -nolow -dir out -lib repeatlibrary/teseqs.fasta $i;done  
 ```
@@ -401,6 +401,37 @@ Executed on vetgrid27
 awk '{print $0,FILENAME}' *.ori.out|perl -pe 's/\.fa\.ori\.out//' >merged-101.ori.out 
 ```
 Then transfer to my iMac with sftp
+
+# Tinkering - adding Pi2 for Dmel and SZ232 for Dsim
+
+It would be nice to have also a Dmel strain which has the P-element.
+Therefore we are adding Pi2 to the 101 strains -> hence 102 strains
+
+```{bash eval=FALSE}
+mv ../Pi2.fasta D.mel.Pi2.fa                                                                                                                                      
+mv D.melanogaster.fa D.mel.Iso1.fa 
+mv D.melanogaster.fa.ori.out D.mel.Iso1.fa.ori.out # renamed just the ori.out (the others are still called D.melanogaster.fa.*)
+RepeatMasker -pa 20 -no_is -s -nolow -dir out -lib repeatlibrary/teseqs.fasta D.mel.Pi2.fa 
+
+RepeatMasker -pa 20 -no_is -s -nolow -dir . -lib ../repeatlibrary/teseqs.fasta D.sim.SZ232.fa  
+RepeatMasker -pa 20 -no_is -s -nolow -dir outtmp -lib repeatlibrary/teseqs.fasta D.sim.SZ129.fa   
+# status
+# SZ129 hat KEIN P-element
+# SZ232 hat das P-element ! 
+
+mv D.sim.SZ232.fa.ori.out ../out       # lets include 232 into the analysis
+mv D.simulans.fa.ori.out D.sim.006.fa.ori.out  # which makes renaming the other sim strain necessary
+
+# rename old output to not include it twice 
+mv merged-101.ori.out merged-101.ori.out.old
+# create the new merged file, now 103 Drosophila genomes
+awk '{print $0,FILENAME}' *.ori.out|perl -pe 's/\.fa\.ori\.out//' >merged-103.ori.out 
+
+# sanity check -> 103 genomes?
+cat merged-103.ori.out|awk '{print $15}'|uniq -c |wc                                                                                                          
+# 103     206    1924 -> yes it is 103
+# transfer to main computer and proceed with next Rmd
+```
 
 
 

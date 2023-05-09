@@ -4,7 +4,7 @@ Origin of the TEs - visualization
 # Compute the score for each TE and each species
 
 ``` bash
-python process-101genomes.py --rm raw/merged-101.ori.out > te-species-score.txt 
+python process-101genomes.py --rm raw/merged-103.ori.out > te-species-score-103.txt
 ```
 
 What is the script doing? For each TE find the maximum RM score. the
@@ -13,7 +13,7 @@ the max ie ‘te\_species\_max’ than normalize to the total max: ‘score =
 te\_species\_max/te\_max’
 
 ``` bash
-head te-species-score.txt
+head te-species-score-103.txt
 #RT1C   D.sp.14030-0761.01  0.109682473847
 #RT1C   D.erecta    0.356053274344
 #RT1C   D.insularis 0.112862343887
@@ -44,7 +44,7 @@ lets set the sort order for all analysis
 #  Dmel subgroup https://en.wikipedia.org/wiki/Drosophila_melanogaster_species_subgroup
 sortorder<-c( 
       # melanogaster group
-      "D.melanogaster","D.simulans","D.mauritiana","D.sechellia", "D.yakuba", "D.teissieri.273.3","D.teissieri.ct02","D.erecta", # melanogaster subgroup
+      "D.mel.Iso1","D.mel.Pi2","D.sim.006","D.sim.SZ232","D.mauritiana","D.sechellia", "D.yakuba", "D.teissieri.273.3","D.teissieri.ct02","D.erecta", # melanogaster subgroup
       "D.eugracilis", "D.subpulchrella", "D.biarmipes", "D.takahashii", "D.ficusphila", # several subroups
       "D.carrolli", "D.rhopaloa","D.kurseongensis", "D.fuyamai", #  rhopaloa subgroup
       "D.elegans", "D.oshimai", # elegans + suzuki subgroups
@@ -109,15 +109,18 @@ library(tidyverse)
 ``` r
 theme_set(theme_bw())
 
-h<-read.table("/Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/te-species-score.txt",header=F)
+h<-read.table("/Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/te-species-score-103.txt",header=F)
 names(h)<-c("te","species","score")
 h$spec <- factor(h$spec, levels=sortorder)
 
 # the three new ones
 t<-subset(h,te %in% c("OPUS","412","BLOOD"))
 
-p<- ggplot(t,aes(y=score,x=spec))+geom_bar(stat="identity")+facet_grid(te~.)+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size=5))
+p<- ggplot(t,aes(y=score,x=spec))+geom_bar(stat="identity")+facet_grid(te~.)+ylab("similarity")+
+  theme(axis.title.x=element_blank(),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size=5))
+
+
 plot(p)
 ```
 
@@ -127,8 +130,9 @@ plot(p)
 # the missed
 t<-subset(h,te %in% c("DV26847"))
 
-p<- ggplot(t,aes(y=score,x=spec))+geom_bar(stat="identity")+facet_grid(te~.)+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size=5))
+p<- ggplot(t,aes(y=score,x=spec))+geom_bar(stat="identity")+facet_grid(te~.)+ylab("similarity")+
+  theme(axis.title.x=element_blank(),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size=5))
 plot(p)
 ```
 
@@ -138,8 +142,8 @@ plot(p)
 # all invaders
 t<-subset(h,te %in% c("PPI251","DMHFL1","DMIFACA","TIRANT","OPUS","412","BLOOD"))
 
-p<- ggplot(t,aes(y=score,x=spec))+geom_bar(stat="identity")+facet_grid(te~.)+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size=5))
+p<- ggplot(t,aes(y=score,x=spec))+geom_bar(stat="identity")+facet_grid(te~.)+ylab("similarity")+
+  theme(axis.title.x=element_blank(),axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size=5))
 plot(p)
 ```
 
