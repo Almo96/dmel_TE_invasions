@@ -1,6 +1,7 @@
 # This script will create a .csv for every sample in the input directory.
 # Every .csv will contain the copy number of every trapsoson provided for the sample.
 # The input files are produced with deviaTE
+#Creator Almo
 
 import os
 
