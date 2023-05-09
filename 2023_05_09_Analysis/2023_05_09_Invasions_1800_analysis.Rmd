@@ -99,7 +99,7 @@ gg_412_all <- ggplot(df_museum_412, aes(x=as.factor(estimated_year), y=All_reads
   xlab("Estimated year") +
   ylab("Copy number")
 plot(gg_412_all)
-gg_412_HQ <- ggplot(df_museum, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
+gg_412_HQ <- ggplot(df_museum_412, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
   geom_boxplot() +
   labs(title = "412 HQ reads")+
   xlab("Estimated year") +
@@ -159,12 +159,12 @@ gg_OPUS_all <- ggplot(df_museum_GYPSY2, aes(x=as.factor(estimated_year), y=All_r
   xlab("Estimated year") +
   ylab("Copy number")
 plot(gg_OPUS_all)
-gg_OPUS_HQ <- ggplot(df_museum_GYPSY2, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
+gg_GYPSY_HQ <- ggplot(df_museum_GYPSY2, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
   geom_boxplot() +
-  labs(title = "TIRANT HQ reads")+
+  labs(title = "GYPSY HQ reads")+
   xlab("Estimated year") +
   ylab("Copy number")
-plot(gg_OPUS_HQ)
+plot(gg_GYPSY_HQ)
 
 
 

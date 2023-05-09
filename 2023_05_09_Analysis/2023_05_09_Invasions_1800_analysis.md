@@ -136,7 +136,7 @@ plot(gg_412_all)
 ![](2023_05_09_Invasions_1800_analysis_files/figure-gfm/unnamed-chunk-4-3.png)<!-- -->
 
 ``` r
-gg_412_HQ <- ggplot(df_museum, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
+gg_412_HQ <- ggplot(df_museum_412, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
   geom_boxplot() +
   labs(title = "412 HQ reads")+
   xlab("Estimated year") +
@@ -228,12 +228,12 @@ plot(gg_OPUS_all)
 ![](2023_05_09_Invasions_1800_analysis_files/figure-gfm/unnamed-chunk-4-11.png)<!-- -->
 
 ``` r
-gg_OPUS_HQ <- ggplot(df_museum_GYPSY2, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
+gg_GYPSY_HQ <- ggplot(df_museum_GYPSY2, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
   geom_boxplot() +
-  labs(title = "TIRANT HQ reads")+
+  labs(title = "GYPSY HQ reads")+
   xlab("Estimated year") +
   ylab("Copy number")
-plot(gg_OPUS_HQ)
+plot(gg_GYPSY_HQ)
 ```
 
 ![](2023_05_09_Invasions_1800_analysis_files/figure-gfm/unnamed-chunk-4-12.png)<!-- -->
