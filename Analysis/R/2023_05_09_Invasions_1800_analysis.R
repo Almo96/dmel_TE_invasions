@@ -82,8 +82,7 @@ gg_different_TEs_all <- ggplot(sorted_museum_difference_all, aes(x = TE, y = dif
   geom_bar(stat = "identity", color='skyblue',fill='steelblue')+
   labs(title = "All reads - Difference between 1800 and 1933 in the museum samples")+
   xlab("TE") +
-  ylab("Difference in copy number")+
-  coord_cartesian(xlim = c(1, 10))
+  ylab("Difference in copy number")
 plot(gg_different_TEs_all)
 
 
@@ -91,8 +90,7 @@ gg_different_TEs_HQ <- ggplot(sorted_museum_difference_HQ, aes(x=TE, y=diff_HQ))
   geom_bar(stat = "identity", color='skyblue',fill='steelblue')+
   labs(title = "HQ reads - Difference between 1800 and 1933 in the museum samples")+
   xlab("TE") +
-  ylab("Difference in copy number")+
-  coord_cartesian(xlim = c(1, 10))
+  ylab("Difference in copy number")
 plot(gg_different_TEs_HQ)
 
 
@@ -105,7 +103,7 @@ gg_412_all <- ggplot(df_museum_412, aes(x=as.factor(estimated_year), y=All_reads
   xlab("Estimated year") +
   ylab("Copy number")
 plot(gg_412_all)
-gg_412_HQ <- ggplot(df_museum, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
+gg_412_HQ <- ggplot(df_museum_412, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
   geom_boxplot() +
   labs(title = "412 HQ reads")+
   xlab("Estimated year") +
@@ -165,27 +163,27 @@ gg_OPUS_all <- ggplot(df_museum_GYPSY2, aes(x=as.factor(estimated_year), y=All_r
   xlab("Estimated year") +
   ylab("Copy number")
 plot(gg_OPUS_all)
-gg_OPUS_HQ <- ggplot(df_museum_GYPSY2, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
+gg_GYPSY_HQ <- ggplot(df_museum_GYPSY2, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
   geom_boxplot() +
-  labs(title = "TIRANT HQ reads")+
+  labs(title = "GYPSY HQ reads")+
   xlab("Estimated year") +
   ylab("Copy number")
-plot(gg_OPUS_HQ)
+plot(gg_GYPSY_HQ)
 
 
 
-df_museum_KEPLER <- subset(df, study == "museum" & TE == "KEPLER")
-gg_KEPLER_all <- ggplot(df_museum_KEPLER, aes(x=as.factor(estimated_year), y=All_reads)) + 
+df_museum_GYPSY5 <- subset(df, study == "museum" & TE == "GYPSY5")
+gg_GYPSY5_all <- ggplot(df_museum_GYPSY5, aes(x=as.factor(estimated_year), y=All_reads)) + 
   geom_boxplot() +
-  labs(title = "KEPLER all reads")+
+  labs(title = "GYPSY5 all reads")+
   xlab("Estimated year") +
   ylab("Copy number")
-plot(gg_KEPLER_all)
-gg_KEPLER_HQ <- ggplot(df_museum_KEPLER, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
+plot(gg_GYPSY5_all)
+gg_GYPSY5_HQ <- ggplot(df_museum_GYPSY5, aes(x=as.factor(estimated_year), y=HQ_reads)) + 
   geom_boxplot() +
-  labs(title = "KEPLER HQ reads")+
+  labs(title = "GYPSY5 HQ reads")+
   xlab("Estimated year") +
   ylab("Copy number")
-plot(gg_KEPLER_HQ)
+plot(gg_GYPSY5_HQ)
 
 
