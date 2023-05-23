@@ -60,7 +60,7 @@ names(h)<-c("te","chr","strand","start","end","div","fraglen","telen","sample")
 h$lenfraction <- h$fraglen / h$telen
 # https://ggplot2.tidyverse.org/reference/geom_hex.html
 h<-subset(h,fraglen>200)
-h<-subset(h,sample %in% c("Canton-S","DGRP-732","Iso1","Pi2"))
+h<-subset(h,sample %in% c("Canton-S","DGRP-732","Iso1","Pi2")) # only high quality assemblies; Oregon-R is contaminated with the P-element; Chakraborty is informed
 h$sample<-factor(h$sample, levels=c("Canton-S", "Iso1", "DGRP-732", "Pi2"))
 tmuseum<-subset(h,te %in% c("OPUS","BLOOD","412"))
 tall<-subset(h,te %in% c("PPI251","DMHFL1","DMIFACA","TIRANT","OPUS","412","BLOOD"))
@@ -68,14 +68,14 @@ tall$te<-factor(tall$te, levels=c("412","BLOOD","OPUS", "TIRANT", "DMIFACA","DMH
 levels(tall$te) <- c('412', 'Blood', 'Opus',"Tirant","I-element","Hobo","P-element")
 
 p <- ggplot(tall, aes(div, lenfraction)) + geom_hex(bins=10)+facet_grid(sample~te)+
-  scale_fill_gradient2(limits = c(0, 30), oob = scales::squish)+xlab("divergence")+ylab("length fraction of full-length insertion")
+  scale_fill_gradient2(limits = c(0, 25), oob = scales::squish)+xlab("divergence")+ylab("length fraction of full-length insertion")
 plot(p)
 ```
 
 ![](01-repeat-analysis_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ``` r
-pdf(file="/Users/rokofler/analysis/dmel_TE_invasions/2023-05-five-dmel/graphs/all-separate.pdf",width=8,height=7)
+pdf(file="/Users/rokofler/analysis/dmel_TE_invasions/2023-05-five-dmel/graphs/all-separate.pdf",width=8,height=5)
 plot(p)
 dev.off()
 ```
