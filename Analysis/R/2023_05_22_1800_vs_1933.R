@@ -212,6 +212,3 @@ table_fig2_ordered <- table_fig2 %>%
   select(TE, all_of(samples_2))
 
 table_fig2_ordered
-
-# Save as XLSX
-write_xlsx(table_fig2_ordered, "/Volumes/INTENSO/deviaTE_plots/Paper/Figure_2/table_fig2.xlsx")
