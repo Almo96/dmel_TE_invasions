@@ -110,6 +110,7 @@ plot(gg_1A_log_Lau)
 #Combined
 gg_1A <- ggarrange(gg_1A_log_Har_s, gg_1A_log_Lau, ncol = 1, nrow = 2)
 plot(gg_1A)
+ggsave("/Volumes/INTENSO/deviaTE_plots/Paper/Supplementary_figures/reads_50/supp_1A.png", gg_1A, width = 10, height = 8, dpi = 300)
 
 
 #Figure check Harwich and Lousanne_S
@@ -158,15 +159,22 @@ df_museum_a <- df_2 %>%
 df_GDL_museum_8a_TEs <- subset(df_museum_a, TE == "412"|TE== "OPUS"|TE == "BLOOD"|TE =="CIRC"|TE =="INVADER4")
 
 df_GDL_museum_8a_TEs$study <- factor(df_GDL_museum_8a_TEs$estimated_year, levels = c(1800, 1933))
-df_GDL_museum_8a_TEs$TE <- factor(df_GDL_museum_8a_TEs$TE, levels = c("412", "OPUS","BLOOD","CIRC","INVADER4"))
+df_GDL_museum_8a_TEs$TE <- factor(df_GDL_museum_8a_TEs$TE, levels = c("412", "BLOOD","OPUS","CIRC","INVADER4"))
 
 fig_1C <- ggplot(df_GDL_museum_8a_TEs, aes(x = as.factor(estimated_year), y = All_reads)) +
   geom_boxplot() +
   geom_signif(comparisons = list(c("1800", "1933")), map_signif_level = TRUE, textsize = 2) +
-  facet_wrap(~ TE, nrow = 1) +
+  facet_wrap(~ TE, nrow = 1, labeller = labeller(TE = 
+                                                   c("412" = "412",
+                                                     "BLOOD" = "Blood",
+                                                     "OPUS" = "Opus",
+                                                     "CIRC" = "Circ",
+                                                     "INVADER4" = "Invader-4")))+
   labs(x = "year", y = "copy number")
 
 plot(fig_1C)
+ggsave("/Volumes/INTENSO/deviaTE_plots/Paper/Supplementary_figures/reads_50/supp_1C.png", fig_1C, width = 10, height = 3, dpi = 300)
+
 
 #Sanity check on single copy genes
 df_GDL_museum_8b_TEs <- subset(df_museum_a, TE=="Dmel_rhi"|TE=="Dmel_rpl32"|TE=="Dmel_tj")

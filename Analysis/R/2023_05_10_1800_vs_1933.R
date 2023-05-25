@@ -165,6 +165,12 @@ fig_1C <- ggplot(df_GDL_museum_8a_TEs, aes(x = as.factor(estimated_year), y = Al
   geom_boxplot() +
   geom_signif(comparisons = list(c("1800", "1933")), map_signif_level = TRUE, textsize = 2) +
   facet_wrap(~ TE, nrow = 1) +
+  facet_wrap(~ TE, nrow = 1, labeller = labeller(TE = 
+                                                   c("412" = "412",
+                                                     "BLOOD" = "Blood",
+                                                     "OPUS" = "Opus",
+                                                     "CIRC" = "Circ",
+                                                     "INVADER4" = "Invader-4")))+
   labs(x = "year", y = "copy number")
 
 plot(fig_1C)
