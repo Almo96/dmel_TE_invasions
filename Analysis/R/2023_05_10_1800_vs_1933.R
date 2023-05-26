@@ -159,7 +159,7 @@ df_museum_a <- df_2 %>%
 df_GDL_museum_8a_TEs <- subset(df_museum_a, TE == "412"|TE== "OPUS"|TE == "BLOOD"|TE =="CIRC"|TE =="INVADER4")
 
 df_GDL_museum_8a_TEs$study <- factor(df_GDL_museum_8a_TEs$estimated_year, levels = c(1800, 1933))
-df_GDL_museum_8a_TEs$TE <- factor(df_GDL_museum_8a_TEs$TE, levels = c("412", "OPUS","BLOOD","CIRC","INVADER4"))
+df_GDL_museum_8a_TEs$TE <- factor(df_GDL_museum_8a_TEs$TE, levels = c("412", "BLOOD","OPUS","CIRC","INVADER4"))
 
 fig_1C <- ggplot(df_GDL_museum_8a_TEs, aes(x = as.factor(estimated_year), y = All_reads)) +
   geom_boxplot() +
@@ -169,7 +169,7 @@ fig_1C <- ggplot(df_GDL_museum_8a_TEs, aes(x = as.factor(estimated_year), y = Al
                                                    c("412" = "412",
                                                      "BLOOD" = "Blood",
                                                      "OPUS" = "Opus",
-                                                     "CIRC" = "Circ",
+                                                     "CIRC" = "Circe",
                                                      "INVADER4" = "Invader-4")))+
   labs(x = "year", y = "copy number")
 

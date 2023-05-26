@@ -1,23 +1,17 @@
----
-title: "2023_05_23_PopulationTE2_rpm"
-output: github_document
-author: Almorò Scarpa
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+2023_05_23_PopulationTE2_rpm
+================
+Almorò Scarpa
 
 Setting the environment
-``` {r, message = FALSE}
+
+``` r
 library(tidyverse)
 library(writexl)
 library(ggpubr)
 theme_set(theme_bw())
 ```
 
-```{r, warning=FALSE}
-
+``` r
 df_0 <- read.csv("/Users/ascarpa/dmel_TE_invasions/Analysis/Pop2_reads.csv", header = TRUE)
 df_0$rpm_tot <- (df_0$reads*1000000)/df_0$reads_in_file
 df_0$rpm_map <- (df_0$reads*1000000)/df_0$reads_mapped
@@ -46,7 +40,11 @@ rpm_map <- ggplot(df_GDL_museum_TEs, aes(x = as.factor(estimated_year), y = rpm_
   labs(x = "year", y = "rpm")
 
 plot(rpm_map)
+```
 
+![](2023_05_23_PopulationTE2_rpm_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+``` r
 #Sanity check on signle copy genes
 df_GDL_museum_8b_TEs <- subset(df_museum, te=="Dmel_rhi"|te=="Dmel_rpl32"|te=="Dmel_tj")
 
@@ -59,4 +57,7 @@ ggplot(df_GDL_museum_8b_TEs, aes(x = as.factor(estimated_year), y = rpm_tot)) +
   labs(x = "year", y = "rpm")
 ```
 
-The results are consistent if we use a different software and we consider the row reads without normalization
+![](2023_05_23_PopulationTE2_rpm_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
+
+The results are consistent if we use a different software and we
+consider the row reads without normalization
