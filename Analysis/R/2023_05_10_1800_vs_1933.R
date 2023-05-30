@@ -7,7 +7,7 @@ df_0 <- read.csv("/Volumes/INTENSO/merged/CSV/GDL_ols_museum.csv", header = FALS
 names(df_0) <- c("run_accession","TE", "All_reads", "HQ_reads")
 
 
-df_metadata <- read.table("/Users/ascarpa/Downloads/dataset-metadata.txt", sep = "\t", header = TRUE)
+df_metadata <- read.table("/Users/ascarpa/dmel_TE_invasions/dataset-metadata", sep = "\t", header = TRUE)
 
 df_2 <- inner_join(df_0, df_metadata, by = "run_accession") 
 

@@ -168,7 +168,7 @@ fig_1C <- ggplot(df_GDL_museum_8a_TEs, aes(x = as.factor(estimated_year), y = Al
                                                    c("412" = "412",
                                                      "BLOOD" = "Blood",
                                                      "OPUS" = "Opus",
-                                                     "CIRC" = "Circ",
+                                                     "CIRC" = "Circe",
                                                      "INVADER4" = "Invader-4")))+
   labs(x = "year", y = "copy number")
 
