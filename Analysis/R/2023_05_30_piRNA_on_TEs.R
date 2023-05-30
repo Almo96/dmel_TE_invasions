@@ -29,3 +29,40 @@ g_1 <- ggplot(df,aes(x=pos,y=pirna))+
                                                    "INVADER4" = "Invader-4")))
 
 plot(g_1)
+
+#Ping-pong signature
+df2 <- read.table("/Volumes/INTENSO/piRNA/noadapt/bam/pingpongforR")
+names(df2) <- c("Run", "te", "sense", "pos", "frequency")
+df2 <- subset(df2, te=="412" | te=="BLOOD" |te=="OPUS")
+
+df2<-inner_join(df2, metadata, by = "Run")
+
+df2s <- subset(df2, sense == "s")
+df2as <- subset(df2, sense == "as")
+
+
+g_2 <- ggplot(df2s,aes(x=pos,y=frequency))+
+  geom_col()+
+  ylab("ping-pong signature")+
+  xlab("overlap")+
+  facet_grid( Strain ~ te, labeller = labeller(te = 
+                                                 c("412" = "412",
+                                                   "BLOOD" = "Blood",
+                                                   "OPUS" = "Opus",
+                                                   "CIRC" = "Circe",
+                                                   "INVADER4" = "Invader-4")))
+
+plot(g_2)
+
+g_3 <- ggplot(df2as,aes(x=pos,y=frequency))+
+  geom_col()+
+  ylab("ping-pong signature")+
+  xlab("overlap")+
+  facet_grid( Strain ~ te, labeller = labeller(te = 
+                                                 c("412" = "412",
+                                                   "BLOOD" = "Blood",
+                                                   "OPUS" = "Opus",
+                                                   "CIRC" = "Circe",
+                                                   "INVADER4" = "Invader-4")))
+
+plot(g_3)
