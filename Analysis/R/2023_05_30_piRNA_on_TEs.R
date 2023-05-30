@@ -18,6 +18,7 @@ yhigh=max(df$pirna)
 g_1 <- ggplot(df,aes(x=pos,y=pirna))+
   geom_segment(aes(xend=pos),yend=0)+
   ylim(ylow,yhigh)+
+  xlim(0,8000)+
   ylab("piRNA abundance [pmp]")+
   xlab("position of piRNA (5' end)")+
   facet_grid( Strain ~ te, labeller = labeller(te = 
