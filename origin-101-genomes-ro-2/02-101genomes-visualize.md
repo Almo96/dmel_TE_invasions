@@ -109,7 +109,7 @@ library(tidyverse)
 ``` r
 theme_set(theme_bw())
 
-h<-read.table("/Users/rokofler/analysis/dmel_TE_invasions/2023-04-origin-101-genomes-ro-2/te-species-score-103.txt",header=F)
+h<-read.table("/Users/rokofler/analysis/dmel_TE_invasions/origin-101-genomes-ro-2/te-species-score-103.txt",header=F)
 names(h)<-c("te","species","score")
 h$spec <- factor(h$spec, levels=sortorder)
 
@@ -141,6 +141,9 @@ plot(p)
 ``` r
 # all invaders
 t<-subset(h,te %in% c("PPI251","DMHFL1","DMIFACA","TIRANT","OPUS","412","BLOOD"))
+t$te<-factor(t$te, levels=c("412","BLOOD","OPUS", "TIRANT", "DMIFACA","DMHFL1","PPI251"))
+levels(t$te) <- c('412', 'Blood', 'Opus',"Tirant","I-element","Hobo","P-element")
+
 
 p<- ggplot(t,aes(y=score,x=spec))+geom_bar(stat="identity")+facet_grid(te~.)+ylab("similarity")+
   theme(axis.title.x=element_blank(),axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size=5))
@@ -148,3 +151,12 @@ plot(p)
 ```
 
 ![](02-101genomes-visualize_files/figure-gfm/unnamed-chunk-4-3.png)<!-- -->
+
+``` r
+pdf(file="/Users/rokofler/analysis/dmel_TE_invasions/origin-101-genomes-ro-2/graphs/origin.pdf",width=7,height=7)
+plot(p)
+dev.off()
+```
+
+    ## quartz_off_screen 
+    ##                 2

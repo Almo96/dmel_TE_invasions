@@ -1,0 +1,99 @@
+Coleoptera	Coccinellidae	Cryptolaemus	590	Cryptolaemus montrouzieri	SYSU_Cmont_1.0	GCA_013387265.1	Oxford Nanopore; Illumina NovaSeq	long	oxford	988106770	8,99	10375940	7,02	02.07.20	95,9	1,1	97	0,7	2,3	100
+Coleoptera	Coccinellidae	Harmonia	574	Harmonia axyridis	ASM1103304v1	GCA_011033045.1	PacBio RSII; Illumina HiSeq	long	pacbio	417140630	8,62	1254346	6,1	27.02.20	91,2	2,4	93,6	1	5,4	100
+Coleoptera	Coccinellidae	Propylea	588	Propylea japonica	ASM1342104v1	GCA_013421045.1	PacBio Sequel	long	pacbio	851227647	8,93	813984	5,91	16.07.20	88,5	6,2	94,7	1	4,3	100
+Coleoptera	Curculionidae	Listronotus	594	Listronotus bonariensis	ASM1417023v1	GCA_014170235.1	Oxford Nanopore MinION; Illumina HiSeq	long	oxford	1112438712	9,05	120328	5,08	12.08.20	82,2	5,1	87,3	6,5	6,2	100
+Coleoptera	Curculionidae	Sitophilus	585	Sitophilus oryzae	Soryzae_2.0	GCA_002938485.2	Illumina HiSeq; Oxford Nanopore MinION; PacBio RS	long	pacb_oxford	770550206	8,89	1039787	6,02	09.09.19	96,6	1,9	98,5	0,4	1,1	100
+Coleoptera	Elateridae	Limonius	593	Limonius californicus	UIdaho_Lcali_1.0	GCA_014611495.1	Illumina HiSeq; PacBio RSII; Illumina MiSeq	long	pacbio	1072670101	9,03	19395	4,29	16.09.20	80,5	6,1	86,6	8,9	4,5	100
+Coleoptera	Lampyridae	Abscondita	576	Abscondita terminalis	Ate	GCA_013368085.1	PacBio RSII	long	pacbio	499652588	8,7	1220005	6,09	23.06.20	96,5	2	98,5	0,3	1,2	100
+Coleoptera	Lampyridae	Lamprigera	592	Lamprigera yunnana	ASM1336807v1	GCA_013368075.1	PacBio RSII	long	pacbio	1052929944	9,02	3509824	6,55	23.06.20	97,5	1,3	98,8	0,5	0,7	100
+Coleoptera	Lampyridae	Photinus	575	Photinus pyralis	Ppyr1.3	GCA_008802855.1	PacBio RSII; Illumina HiSeq	long	pacbio	471511253	8,67	170308	5,23	02.10.19	90	8,9	98,9	0,4	0,7	100
+Coleoptera	Nitidulidae	Aethina	564	Aethina tumida	Atum_1.0	GCA_001937115.1	Illumina HiSeq; PacBio	long	pacbio	234344249	8,37	298879	5,48	05.01.17	89,7	7,6	97,3	1,3	1,4	100
+Coleoptera	Scarabaeidae	Protaetia	595	Protaetia brevitarsis	ASM414364v1	GCA_004143645.1	PacBio RSII; Illumina HiSeq	long	pacbio	1143903595	9,06	318221	5,5	07.02.19	64,4	32,7	97,1	1,4	1,5	100
+Coleoptera	Scarabaeidae	Trypoxylus	583	Trypoxylus dichotomus	ASM1490549v1	GCA_014905495.1	PacBio Sequel II	long	pacbio	739405423	8,87	7929129	6,9	07.10.20	98,2	1,1	99,3	0,4	0,3	100
+Coleoptera	Silphidae	Nicrophorus	563	Nicrophorus vespilloides	Nicve_v1.0	GCA_001412225.1	Illumina HiSeq; PacBio	long	pacbio	195273382	8,29	67958	4,83	23.10.15	98	1,5	99,5	0,3	0,2	100
+Collembola	Entomobryidae	Sinella	554	Sinella curviseta	ASM411504v2	GCA_004115045.2	Illumina NovaSeq; PacBio Sequel	long	pacbio	364329999	8,56	821727	5,91	26.05.20	88,2	2,1	90,3	1,2	8,5	100
+Collembola	Isotomidae	Folsomia	548	Folsomia candida	ASM221717v1	GCA_002217175.1	PacBio	long	pacbio	221702752	8,35	4885648	6,69	12.07.17	88,4	1,5	89,9	1,5	8,6	100
+Collembola	Orchesellidae	Orchesella	551	Orchesella cincta	ASM171814v1	GCA_001718145.1	PacBio; Illumina HiSeq	long	pacbio	286766519	8,46	64904	4,81	02.09.16	84,5	3,3	87,8	1,5	10,7	100
+Diptera	Calliphoridae	Cochliomyia	526	Cochliomyia hominivorax	ASM430292v1	GCA_004302925.1	PacBio	long	pacbio	534026350	8,73	616429	5,79	26.02.19	95	3,7	98,7	1	0,3	100
+Diptera	Calliphoridae	Phormia	527	Phormia regina	ASM173554v1	GCA_001735545.1	Illumina HiSeq; PacBio	long	pacbio	549932840	8,74	5563	3,75	19.09.16	93,8	2,2	96	2,6	1,4	100
+Diptera	Chironomidae	Belgica	372	Belgica antarctica	ASM77530v1	GCA_000775305.1	Illumina; PacBio	long	pacbio	89567811	7,95	13715	4,14	03.09.14	96,6	0,7	97,3	1,4	1,3	100
+Diptera	Culicidae	Aedes	537	Aedes albopictus	canu_80X_arrow2.2	GCA_001876365.2	PacBio	long	pacbio	2247289552	9,35	3303944	6,52	09.01.17	15,9	83,2	99,1	0,1	0,8	100
+Diptera	Culicidae	Aedes	536	Aedes aegypti	AaegL5.0	GCA_002204515.1	PacBio	long	pacbio	1278715314	9,11	11758062	7,07	22.06.17	93,2	5,3	98,5	0,7	0,8	100
+Diptera	Culicidae	Anopheles	426	Anopheles albimanus	VT_AalbS3_pri_1.0	GCA_013758885.1	Oxford Nanopore MinION; Illumina HiSeq; Bionano DLS; Hi-C	long	hi-c	172602732	8,24	25000043	7,4	27.07.20	98,2	0,9	99,1	0,2	0,7	100
+Diptera	Culicidae	Anopheles	486	Anopheles gambiae	ASM154264v1	GCA_001542645.1	PacBio	long	pacbio	293732707	8,47	101465	5,01	02.02.16	82,4	3,4	85,8	7,7	6,5	100
+Diptera	Culicidae	Anopheles	514	Anopheles funestus	AfunF3	GCA_003951495.1	PacBio RSII	long	pacbio	444530063	8,65	107489	5,03	20.12.18	57,9	41,7	99,6	0,1	0,3	100
+Diptera	Culicidae	Anopheles	475	Anopheles stephensi	UCI_ANSTEP_V1.0	GCA_013141755.1	PacBio RSII; PacBio Sequel	long	pacbio	243460342	8,39	38117870	7,58	22.05.20	95,5	3,9	99,4	0,2	0,4	100
+Diptera	Culicidae	Anopheles	477	Anopheles coluzzii	ASM413651v2	GCA_004136515.2	PacBio Sequel	long	pacbio	251398820	8,4	3468756	6,54	06.02.19	60,9	38,4	99,3	0,2	0,5	100
+Diptera	Diopsidae	Teleopsis	530	Teleopsis dalmanni	Tel_dalmanni_2A_v1.0	GCA_002237135.1	454; Illumina GAIIx; Illumina HiSeq; PacBio	long	pacbio	620883900	8,79	64335	4,81	28.07.17	72,3	26	98,3	0,5	1,2	100
+Diptera	Muscidae	Haematobia	534	Haematobia irritans	Hi v1.0	GCA_003123925.1	Illumina HiSeq; PacBio	long	pacbio	1143537531	9,06	5359	3,73	14.05.18	63,6	0,8	64,4	9,8	25,8	100
+Diptera	Muscidae	Musca	511	Musca domestica	ASM1484373v1	GCA_014843735.1	Oxford Nanopore MinION	long	oxford	427466556	8,63	71431	4,85	05.10.20	38,8	0,2	39	17,1	43,9	100
+Diptera	Sarcophagidae	Sarcophaga	528	Sarcophaga peregrina	ASM1463599v1	GCA_014635995.1	PacBio Sequel	long	pacbio	560735179	8,75	3839545	6,58	18.09.20	96,9	0,5	97,4	0,7	1,9	100
+Diptera	Sciaridae	Bradysia	488	Bradysia coprophila	BU_Bcop_v1	GCA_014529535.1	PacBio RSII; Oxford Nanopore MinION; Illumina HiSeq; BioNano Genomics Irys	long	pacb_oxford	309728657	8,49	2330419	6,37	11.09.20	96,3	3,1	99,4	0,4	0,2	100
+Diptera	Tephritidae	Bactrocera	520	Bactrocera oleae	MU_Boleae_v2	GCA_001188975.4	Illumina HiSeq; PacBio RSII; Oxford Nanopore MiniION	long	pacb_oxford	484931532	8,69	187710	5,27	30.04.19	98,8	0,3	99,1	0,2	0,7	100
+Hemiptera	Aleyrodidae	Bemisia	349	Bemisia tabaci	ASM185493v1	GCA_001854935.1	Illumina HiSeq; PacBio	long	pacbio	615001830	8,79	84501	4,93	26.10.16	95,8	1,8	97,6	0,7	1,7	100
+Hemiptera	Aleyrodidae	Trialeurodes	353	Trialeurodes vaporariorum	ASM1176424v1	GCA_011764245.1	PacBio Sequel	long	pacbio	787484423	8,9	499458	5,7	27.03.20	92,1	2	94,1	0,9	5	100
+Hemiptera	Anthocoridae	Orius	335	Orius insidiosus	ASM1411906v1	GCA_014119065.1	PacBio; Illumina HiSeq	long	pacbio	328990643	8,52	102366	5,01	10.08.20	63,2	22,8	86	4	10	100
+Hemiptera	Aphididae	Aphis	329	Aphis glycines	A_gly_BT4_v2.1	GCA_009928515.1	Illumina MiSeq; PacBio RSII	long	pacbio	303155567	8,48	1999963	6,3	24.01.20	92	3,4	95,4	0,8	3,8	100
+Hemiptera	Aphididae	Rhopalosiphum	333	Rhopalosiphum maidis	ASM367621v3	GCA_003676215.3	PacBio Sequel	long	pacbio	326023155	8,51	9046396	6,96	06.02.19	94,9	2,2	97,1	0,7	2,2	100
+Hemiptera	Aphididae	Sitobion	342	Sitobion miscanthi	ASM808671v1	GCA_008086715.1	PacBio Sequel	long	pacbio	397852643	8,6	1613763	6,21	28.08.19	88,9	3,7	92,6	0,8	6,6	100
+Hemiptera	Delphacidae	Laodelphax	347	Laodelphax striatellus	ASM333518v2	GCA_003335185.2	Illumina HiSeq; PacBio RSII	long	pacbio	539918070	8,73	119723	5,08	15.02.19	93,6	2,3	95,9	2	2,1	100
+Hemiptera	Delphacidae	Nilaparvata	359	Nilaparvata lugens	ASM1435652v1	GCA_014356525.1	PacBio Sequel	long	pacbio	1087807972	9,04	583858	5,77	01.09.20	92,7	2,5	95,2	1,4	3,4	100
+Hemiptera	Liviidae	Diaphorina	345	Diaphorina citri	Diaci psyllid genome assembly version 1.1	GCA_000475195.1	Illumina HiSeq; PacBio	long	pacbio	485705082	8,69	34407	4,54	22.10.13	81,4	4,5	85,9	6,9	7,2	100
+Hemiptera	Miridae	Apolygus	357	Apolygus lucorum	ASM973950v2	GCA_009739505.2	PacBio Sequel	long	pacbio	1023618409	9,01	783891	5,89	04.08.20	93,1	2,3	95,4	1,8	2,8	100
+Hemiptera	Pentatomidae	Euschistus	362	Euschistus heros	E_heros_v1.0_sep_2018	GCA_003667255.1	PacBio Sequel; Illumina	long	pacbio	1325158962	9,12	2463424	6,39	19.10.18	78,7	3,1	81,8	3,7	14,5	100
+Hemiptera	Pseudococcidae	Maconellicoccus	322	Maconellicoccus hirsutus	MB_VBL1.0	GCA_003261595.1	Illumina HiSeq; PacBio	long	pacbio	189239095	8,28	50278	4,7	25.06.18	90,4	5,1	95,5	1,1	3,4	100
+Hemiptera	Pseudococcidae	Phenacoccus	326	Phenacoccus solenopsis	ASM976176v1	GCA_009761765.1	PacBio RSII; Illumina HiSeq	long	pacbio	292537731	8,47	489811	5,69	18.12.19	90,9	4	94,9	1,3	3,8	100
+Hemiptera	Reduviidae	Triatoma	355	Triatoma infestans	UVM_Tinf_1.0	GCA_011037195.1	Illumina; PacBio	long	pacbio	949486157	8,98	95318	4,98	27.02.20	89	1,7	90,7	2	7,3	100
+Hymenoptera	Apidae	Apis	198	Apis mellifera	Amel_HAv3.1	GCA_003254395.2	PacBio; 10X Chromium; Phase Genomics HiC; Bionano	long	hi-c	225234541	8,35	5382476	6,73	10.09.18	99,3	0,1	99,4	0,1	0,5	100
+Hymenoptera	Apidae	Apis	197	Apis dorsata	RUTG_Adors_1.0	GCA_009792835.1	Illumina NextSeq; Oxford Nanopore PromethION	long	oxford	223527749	8,35	30868	4,49	23.12.19	98,5	0,1	98,6	0,5	0,9	100
+Hymenoptera	Apidae	Apis	204	Apis mellifera mellifera	INRA_AMelMel_1.0	GCA_003314205.1	PacBio	long	pacbio	227019819	8,36	5131172	6,71	11.07.18	99,6	0	99,6	0	0,4	100
+Hymenoptera	Apidae	Apis	187	Apis cerana cerana	ASM1110058v1	GCA_011100585.1	PacBio Sequel	long	pacbio	215652617	8,33	3898192	6,59	10.03.20	99,6	0,2	99,8	0	0,2	100
+Hymenoptera	Apidae	Apis	196	Apis mellifera caucasica	ASM1384120v1	GCA_013841205.1	PacBio Sequel	long	pacbio	224766697	8,35	3303520	6,52	28.07.20	99,6	0	99,6	0	0,4	100
+Hymenoptera	Apidae	Apis	195	Apis mellifera carnica	ASM1384124v1	GCA_013841245.1	PacBio Sequel	long	pacbio	226044179	8,35	2692667	6,43	28.07.20	99,3	0,2	99,5	0	0,5	100
+Hymenoptera	Apidae	Bombus	248	Bombus vosnesenskii	Bvos_JDL3184-5_v1.1	GCA_011952255.1	Illumina HiSeq; Oxford Nanopore GridION	long	oxford	275577952	8,44	2733020	6,44	03.04.20	99,5	0,1	99,6	0,3	0,1	100
+Hymenoptera	Apidae	Bombus	243	Bombus bifarius	Bbif_JDL3187	GCA_011952205.1	Illumina NovaSeq; Oxford Nanopore GridION	long	oxford	266784621	8,43	2202782	6,34	03.04.20	99	0,4	99,4	0,3	0,3	100
+Hymenoptera	Apidae	Bombus	255	Bombus vancouverensis nearcticus	Bvanc_JDL1245	GCA_011952275.1	Illumina NovaSeq; Oxford Nanopore GridION	long	oxford	282133710	8,45	3064919	6,49	03.04.20	99,2	0,5	99,7	0,2	0,1	100
+Hymenoptera	Braconidae	Aphidius	163	Aphidius gifuensis	ASM1490517v1	GCA_014905175.1	Oxford Nanopore	long	oxford	156944493	8,2	3929594	6,59	21.10.20	96	2,7	98,7	0,1	1,2	100
+Hymenoptera	Braconidae	Aphidius	158	Aphidius ervi	ASM1142645v1	GCA_011426455.1	Illumina HiSeq + PacBio RSII	long	pacbio	138951524	8,14	25199	4,4	18.03.20	95	2,5	97,5	0,4	2,1	100
+Hymenoptera	Braconidae	Chelonus	157	Chelonus insularis	ASM1335770v1	GCA_013357705.1	Illumina NextSeq; PacBio Sequel	long	pacbio	135730493	8,13	1162728	6,07	17.06.20	98,8	0,4	99,2	0,2	0,6	100
+Hymenoptera	Braconidae	Lysiphlebus	159	Lysiphlebus fabarum	ASM1142643v1	GCA_011426435.1	Illumina MiSeq; PacBio RS	long	pacbio	140705580	8,15	216143	5,33	18.03.20	88,2	9,3	97,5	0,2	2,3	100
+Hymenoptera	Colletidae	Colletes	247	Colletes gigas	ASM1312311v1	GCA_013123115.1	PacBio Sequel	long	pacbio	273056604	8,44	6455398	6,81	19.05.20	98,2	1,2	99,4	0,1	0,5	100
+Hymenoptera	Figitidae	Leptopilina	235	Leptopilina clavipes	ASM185565v1	GCA_001855655.1	Illumina HiSeq; PacBio	long	pacbio	255343917	8,41	8276	3,92	28.10.16	91,9	0,7	92,6	3,6	3,8	100
+Hymenoptera	Figitidae	Leptopilina	293	Leptopilina boulardi	ASM1163479v1	GCA_011634795.1	Illumina HiSeq; PacBio	long	pacbio	375718377	8,57	185141	5,27	23.03.20	92,8	2,7	95,5	1,3	3,2	100
+Hymenoptera	Formicidae	Camponotus	253	Camponotus floridanus	Cflo_v7.5	GCA_003227725.1	PacBio	long	pacbio	284009182	8,45	1278439	6,11	14.06.18	98,8	0,4	99,2	0,4	0,4	100
+Hymenoptera	Formicidae	Formica	259	Formica selysi	ASM985913v1	GCA_009859135.1	PacBio	long	pacbio	290452129	8,46	5698920	6,76	14.01.20	97,5	1,6	99,1	0,3	0,6	100
+Hymenoptera	Formicidae	Harpegnathos	282	Harpegnathos saltator	Hsal_v8.5	GCA_003227715.1	PacBio	long	pacbio	334536844	8,52	911506	5,96	14.06.18	98	1,2	99,2	0,1	0,7	100
+Hymenoptera	Formicidae	Monomorium	278	Monomorium pharaonis	ASM1337386v2	GCA_013373865.2	PacBio Sequel	long	pacbio	325506644	8,51	1861574	6,27	13.08.20	96,6	2,4	99	0,4	0,6	100
+Hymenoptera	Formicidae	Nylanderia	291	Nylanderia fulva	TAMU_Nfulva_1.0	GCA_005281655.1	Illumina MiSeq; Illumina TruSeq Synthetic Long-Read; Oxford Nanopore MinION; PacBio Sequel	long	pacb_oxford	375107333	8,57	320712	5,51	13.05.19	95,8	2,2	98	1	1	100
+Hymenoptera	Formicidae	Ooceraea	192	Ooceraea biroi	Obir_v5.4	GCA_003672135.1	PacBio; Oxford Nanopore; Illumina NextSeq	long	pacb_oxford	223876465	8,35	3735272	6,57	23.10.18	98,1	1	99,1	0,2	0,7	100
+Hymenoptera	Formicidae	Solenopsis	302	Solenopsis invicta	ASM1036769v1	GCA_010367695.1	PacBio RSII	long	pacbio	413978255	8,62	1041028	6,02	12.02.20	96,3	2,6	98,9	0,7	0,4	100
+Hymenoptera	Megachilidae	Osmia	169	Osmia lignaria	USDA_OLig_1.0	GCA_012274295.1	PacBio; Illumina NextSeq	long	pacbio	177071571	8,25	5475884	6,74	13.04.20	98,9	0,1	99	0,3	0,7	100
+Hymenoptera	Pteromalidae	Nasonia	263	Nasonia vitripennis	Nvit_psr_1.1	GCA_009193385.2	PacBio RSII; Oxford Nanopore MinION	long	pacb_oxford	297309692	8,47	7180486	6,86	30.01.20	97,4	0,7	98,1	0,5	1,4	100
+Hymenoptera	Pteromalidae	Pteromalus	284	Pteromalus puparum	ZJU_Ppup_chr_1.0	GCA_012977825.2	Illumina HiSeq; PacBio; Hi-C	long	hi-c	338170873	8,53	98825	4,99	13.05.20	96,9	1	97,9	0,6	1,5	100
+Hymenoptera	Vespidae	Polistes	189	Polistes metricus	CU_Pmet_PB	GCA_010416925.1	PacBio Sequel	long	pacbio	219838961	8,34	1605847	6,21	11.02.20	98,4	1,1	99,5	0	0,5	100
+Hymenoptera	Vespidae	Polistes	188	Polistes fuscatus	CU_Pfus_HIC	GCA_010416935.1	PacBio Sequel	long	pacbio	219116742	8,34	879627	5,94	11.02.20	98,4	0,7	99,1	0,3	0,6	100
+Hymenoptera	Vespidae	Vespa	219	Vespa mandarinia	V.mandarinia_Nanaimo_p1.0	GCA_014083535.1	PacBio Sequel	long	pacbio	247710421	8,39	2778186	6,44	06.08.20	98,9	0,4	99,3	0	0,7	100
+Lepidoptera	Carposinidae	Carposina	106	Carposina sasakii	ASM1460749v2	GCA_014607495.2	PacBio Sequel	long	pacbio	399040036	8,6	2597711	6,41	16.09.20	96,9	0,8	97,7	0,4	1,9	100
+Lepidoptera	Crambidae	Chilo	150	Chilo suppressalis	ASM400044v1	GCA_004000445.1	Illumina HiSeq; PacBio RSII	long	pacbio	824354176	8,92	642389	5,81	08.01.19	94,5	1,9	96,4	1,2	2,4	100
+Lepidoptera	Crambidae	Cnaphalocrocis	133	Cnaphalocrocis medinalis	ASM1485141v1	GCA_014851415.1	Illumina HiSeq; PacBio Sequel	long	pacbio	528450314	8,72	524627	5,72	05.10.20	92,1	2,7	94,8	1,3	3,9	100
+Lepidoptera	Hesperiidae	Epargyreus	112	Epargyreus clarus clarus	ASM1459569v1	GCA_014595695.1	PacBio Sequel	long	pacbio	426663811	8,63	3745284	6,57	15.09.20	78,1	8,1	86,2	1,5	12,3	100
+Lepidoptera	Lasiocampidae	Dendrolimus	138	Dendrolimus punctatus	ASM1227379v1	GCA_012273795.1	PacBio RSII	long	pacbio	614070971	8,79	1359888	6,13	13.04.20	94,1	2,3	96,4	1,2	2,4	100
+Lepidoptera	Noctuidae	Heliothis	111	Heliothis virescens	K63_refined_pacbio	GCA_002382865.1	Illumina HiSeq; PacBio	long	pacbio	403154403	8,61	19807	4,3	27.09.17	86,8	2,6	89,4	2,2	8,4	100
+Lepidoptera	Noctuidae	Spodoptera	117	Spodoptera exigua	NJAU_Sexi_v1	GCA_011316535.1	PacBio Sequel; Illumina HiSeq	long	pacbio	446801326	8,65	3467000	6,54	17.03.20	95,9	1,7	97,6	0,2	2,2	100
+Lepidoptera	Noctuidae	Spodoptera	127	Spodoptera frugiperda	ZJU_Sfru_1.0	GCA_011064685.1	PacBio; Illumina HiSeq	long	pacbio	486271792	8,69	1129999	6,05	05.03.20	90,1	2,4	92,5	1,3	6,2	100
+Lepidoptera	Noctuidae	Trichoplusia	98	Trichoplusia ni	tn1	GCA_003590095.1	PacBio; Illumina NextSeq	long	pacbio	368211209	8,57	621965	5,79	24.09.18	93,1	4,6	97,7	0,4	1,9	100
+Lepidoptera	Nymphalidae	Maniola	137	Maniola jurtina	Mjurtina_v1	GCA_009667785.1	Illumina HiSeq; Oxford Nanopore MinION; PacBio RSII	long	pacb_oxford	614735551	8,79	44054	4,64	18.11.19	69,6	17,1	86,7	3,8	9,5	100
+Lepidoptera	Pieridae	Colias	84	Colias croceus	SU_C_cro_Alba_ref_v1	GCA_009982905.1	PacBio; Illumina HiSeq2500; Illumina HiSeq 4000	long	pacbio	318584009	8,5	11686	4,07	29.01.20	90,3	2,2	92,5	3,1	4,4	100
+Lepidoptera	Psychidae	Eumeta	144	Eumeta japonica	Evar_2.0	GCA_005406025.1	Illumina NextSeq 500; Illumina MiSeq; ONT MinION	long	oxford	727118372	8,86	324045	5,51	18.04.19	91,2	1,6	92,8	1,8	5,4	100
+Lepidoptera	Pyralidae	Galleria	125	Galleria mellonella	Honeycombmoth_v1	GCA_004355975.1	PacBio	long	pacbio	483233259	8,68	2885499	6,46	19.03.19	96,7	1,6	98,3	0,2	1,5	100
+Lepidoptera	Saturniidae	Antheraea	142	Antheraea mylitta	AM_v1.0	GCA_014332785.1	Illumina HiSeq; PacBio Sequel	long	pacbio	698407906	8,84	64049	4,81	28.08.20	91,5	6	97,5	0,8	1,7	100
+Lepidoptera	Saturniidae	Samia	116	Samia ricini	Sr_UT_JL_v1.0	GCA_014132275.1	PacBio RS-II; illumina HiSeq1500	long	pacbio	450479495	8,65	21366385	7,33	24.07.20	96,9	0,4	97,3	1,5	1,2	100
+Lepidoptera	Sphingidae	Hyles	140	Hyles vespertilio	ASM998288v1	GCA_009982885.1	PacBio Sequel	long	pacbio	651398004	8,81	7475438	6,87	30.01.20	94,4	3,7	98,1	0,8	1,1	100
+Lepidoptera	Sphingidae	Manduca	124	Manduca sexta	JHU_Msex_v1.0	GCA_014839805.1	Oxford Nanopore MinION; Illumina NovaSeq	long	oxford	470021481	8,67	424948	5,63	30.09.20	92,8	5,1	97,9	0,7	1,4	100
+Lepidoptera	Tortricidae	Cydia	148	Cydia pomonella	Cpom.V2	GCA_003425675.2	Illumina HiSeq; PacBio RS; BioNano; Hi-C	long	hi-c	772891954	8,89	823676	5,92	29.03.19	90,1	4,5	94,6	1,2	4,2	100
+Orthoptera	Gryllidae	Teleogryllus	32	Teleogryllus occipitalis	Tocci_1.0	GCA_011170035.1	HiSeqX; Nanopore MinION	long	oxford	1933831998	9,29	197533	5,3	21.02.20	93,8	1,6	95,4	2,1	2,5	100
+Siphonaptera	Pulicidae	Ctenocephalides	11	Ctenocephalides felis	ASM342690v1	GCA_003426905.1	PacBio Sequel	long	pacbio	775452550	8,89	61000	4,79	24.08.18	74,5	20,5	95	0,9	4,1	100
+Thysanoptera	Thripidae	Thrips	7	Thrips palmi	TpBJ-2018v1	GCA_012932325.1	PacBio Sequel	long	pacbio	237830083	8,38	567478	5,75	29.04.20	96,6	0,4	97	0,2	2,8	100
+Trichoptera	Hydropsychidae	Hydropsyche	1	Hydropsyche tenuis	HT1_wtdbg2_racon_pilon	GCA_009617725.1	Illumina HiSeq; Oxford Nanopore MinION	long	oxford	229663394	8,36	2190134	6,34	07.11.19	96,3	0,5	96,8	1,4	1,8	100
+Trichoptera	Polycentropodidae	Plectrocnemia	2	Plectrocnemia conspersa	P_conspersa_v1	GCA_009617715.1	Oxford Nanopore MinION; Illumina HiSeq	long	oxford	396695105	8,6	868980	5,94	07.11.19	96,6	1	97,6	1	1,4	100
+Trichoptera	Stenopsychidae	Stenopsyche	3	Stenopsyche tienmushanensis	ASM897352v1	GCA_008973525.1	Illumina HiSeq; PacBio Sequel	long	pacbio	451494475	8,65	1296863	6,11	11.10.19	94,3	2,4	96,7	1,2	2,1	100
