@@ -1,0 +1,193 @@
+---
+title: "Private SNPS - Dmel Stealth Invasions"
+output: rmarkdown::github_document
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = '/Users/rpianezza/TE/')
+```
+
+In this script I will try to detect the private SNPs for each population that are driving the PCA. I want to confirm that the pattern shown by UMAP and PCA is confirmed directly from the data. To filter the SNPs, I used the script *mpileup2PCA.py* with low stringency (min-count 5, min-freq 0.1) to call many SNPs to work on in this script.
+
+## Metadata and data preparation
+
+We focus on **GDL** samples, the same used in the UMAP/PCA.
+```{r}
+library(tidyverse)
+
+theme_set(theme_bw())
+
+full_meta <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/preparation/dataset-metadata")
+
+meta_gdl <- full_meta %>% select(run_accession, location, study, estimated_year) %>% rename(ID = "run_accession") %>% filter(study=="gdl") %>% select(-study, -estimated_year)
+```
+
+Upload the .PCAable files produced using the script *mpileup2PCA.py* and merging them with the metadata.
+```{r}
+te412 <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/412/cleaned.PCAable")
+te412$ID <- str_remove(te412$ID, "\\.cleaned$")
+meta_412 <- inner_join(meta_gdl, te412, by="ID")
+
+TIRANT <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/tirant/cleaned.PCAable")
+TIRANT$ID <- str_remove(TIRANT$ID, "\\.cleaned$")
+meta_TIRANT <- inner_join(meta_gdl, TIRANT, by="ID")
+
+BLOOD <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/BLOOD/cleaned.PCAable")
+BLOOD$ID <- str_remove(BLOOD$ID, "\\.cleaned$")
+meta_BLOOD <- inner_join(meta_gdl, BLOOD, by="ID")
+
+OPUS <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/OPUS/cleaned.PCAable")
+OPUS$ID <- str_remove(OPUS$ID, "\\.cleaned$")
+meta_OPUS <- inner_join(meta_gdl, OPUS, by="ID")
+
+CIRC <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/CIRC/cleaned.PCAable")
+CIRC$ID <- str_remove(CIRC$ID, "\\.cleaned$")
+meta_CIRC <- inner_join(meta_gdl, CIRC, by="ID")
+
+INVADER4 <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/INVADER4/cleaned.PCAable")
+INVADER4$ID <- str_remove(INVADER4$ID, "\\.cleaned$")
+meta_INVADER4 <- inner_join(meta_gdl, INVADER4, by="ID")
+
+I <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/I/cleaned.PCAable")
+I$ID <- str_remove(I$ID, "\\.cleaned$")
+(meta_I <- inner_join(meta_gdl, I, by="ID"))
+
+P <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/P-element/cleaned.PCAable")
+P$ID <- str_remove(P$ID, "\\.cleaned$")
+(meta_P <- inner_join(meta_gdl, P, by="ID"))
+
+hobo <- read_tsv("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/hobo/cleaned.PCAable")
+hobo$ID <- str_remove(hobo$ID, "\\.cleaned$")
+(meta_hobo <- inner_join(meta_gdl, hobo, by="ID"))
+```
+
+## Functions
+
+Function which finds private SNPs in each population. Takes as input a merged file (PCAable + metadata) and a frequency threshold (es. 0.5). It counts how many SNPs are present in at least 50% of the individuals in a population and not present in more than 15 other samples.
+
+```{r}
+private <- function(data, threshold, percentage_pop_with_snp){
+snps <- colnames(data)[3:length(colnames(data))]
+populations <- data %>% select(location) %>% distinct() %>% pull()
+private_snps <- tibble(location=NULL, SNP=NULL, thr=NULL, perc_shared_in_pop=NULL, number_external=NULL)
+
+for (pop in populations){
+  for (snp in snps){
+    p <- data %>% select(ID, location, !!snp) %>% filter(location==pop)
+    other <- filter(data, location!=pop)
+    shared <- sum(p[[snp]] < threshold)
+    count_pop <- p %>% summarise(count = n()) %>% pull()
+    other_shared <- sum(other[[snp]] < threshold)
+    if ((shared > (count_pop/100*percentage_pop_with_snp)) & other_shared<15){
+      row <- tibble(location=pop, SNP=snp, thr=threshold, perc_shared_in_pop=shared/count_pop, number_external=other_shared)
+      private_snps <- bind_rows(private_snps, row)
+    }
+  }
+}
+private_snps
+}
+```
+
+Function to loop the function "private()" over multiple thresholds (from 0.5 to 0.9). A private SNP with 0.5 frequency is a very strong proof of a bottleneck during the invasion, while a SNP with only 0.9 is not that significant.
+
+```{r}
+different_thresholds <- function(data, percentage_pop_with_snp){
+result_tibble <- tibble(location=NULL, SNP=NULL, thr=NULL, perc_shared_in_pop=NULL, number_external=NULL)
+for (t in seq(0.5, 0.9, +0.1)){
+  tib <- private(data, t, percentage_pop_with_snp)
+  result_tibble <- bind_rows(result_tibble, tib)
+}
+pops <- result_tibble %>% select(location) %>% distinct() %>% pull()
+filtered_tibble <- tibble(location=NULL, SNP=NULL, thr=NULL, perc_shared_in_pop=NULL, number_external=NULL)
+for (pop in pops){
+  only_pop <- filter(result_tibble, location==pop)
+  filtered <- only_pop %>% filter(thr==0.5)
+for (t in seq(0.6, 0.9, +0.1)){
+  th <- filter(only_pop, thr<t) %>% select(SNP) %>% pull()
+  non_overlapping <- filter(only_pop, thr==t, !(SNP %in% th))
+  filtered <- bind_rows(filtered, non_overlapping)
+}
+  filtered_tibble <- bind_rows(filtered_tibble, filtered)
+}
+filtered_tibble
+}
+```
+
+Function which takes as input the tibble returned from "different_thresholds" and creates a barplot.
+
+```{r}
+private_plot <- function(data, titlee){
+  plottable <- data %>% group_by(location, thr) %>% summarise(count = n()) %>% mutate(thr=1-thr)
+  ggplot(plottable, aes(x = thr, y = count, fill = location)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Frequency threshold", y = "Private SNPs", fill = "Location") +
+  ggtitle(titlee) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  ylim(0,25) #+ xlim(0,0.6)
+}
+```
+
+## Plots
+
+Create the tibbles of private alleles with different frequency thresholds for all the 4 interesting TEs.
+```{r}
+(tib412 <- different_thresholds(meta_412, 50))
+(tib_BLOOD <- different_thresholds(meta_BLOOD, 50))
+(tib_OPUS <- different_thresholds(meta_OPUS, 50))
+(tib_TIRANT <- different_thresholds(meta_TIRANT, 50))
+(tib_I <- different_thresholds(meta_I, 50))
+#(tib_P <- different_thresholds(meta_P, 30))
+(tib_hobo <- different_thresholds(meta_hobo, 50))
+#tib_CIRC <- different_thresholds(meta_CIRC, 50)
+#tib_INVADER4 <- different_thresholds(meta_INVADER4, 50)
+```
+
+Plot the data.
+```{r}
+(plot412 <- private_plot(tib412, "412"))
+(plotOPUS <- private_plot(tib_OPUS, "Opus"))
+(plotTIRANT <- private_plot(tib_TIRANT, "Tirant"))
+(plotI <- private_plot(tib_I, "I-element"))
+#(plotP <- private_plot(tib_P, "P-element"))
+#(plotCIRC <- private_plot(tib_CIRC, "CIRC"))
+#(plotINVADER4 <- private_plot(tib_INVADER4, "INVADER4"))
+
+#ggsave("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/412.png", plot412, dpi = 300, width = 8, height = 6)
+#ggsave("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/OPUS.png", plotOPUS, dpi = 300, width = 8, height = 6)
+#ggsave("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/TIRANT.png", plotTIRANT, dpi = 300, width = 8, height = 6)
+#ggsave("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/CIRC.png", plotCIRC, dpi = 300, width = 8, height = 6)
+```
+
+```{r}
+private_plot_BLOOD<- function(data, titlee){
+  plottable <- data %>% group_by(location, thr) %>% summarise(count = n()) %>% mutate(thr=1-thr)
+  add <- tibble(location=c("Netherlands", "Tasmania, Australia", "Ithaca, USA"), thr=c(0.3, 0.4, 0.5), count = 0)
+  plottable <- bind_rows(plottable, add)
+  ggplot(plottable, aes(x = thr, y = count, fill = location)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Frequency threshold", y = "Private SNPs", fill = "Location") +
+  ggtitle(titlee) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  ylim(0,25) #+ xlim(0,0.6)
+}
+
+(plotBLOOD <- private_plot_BLOOD(tib_BLOOD, "Blood"))
+ggsave("/Volumes/Temp1/Dmel-stealthTEs/private-SNPs/BLOOD.png", plotBLOOD, dpi = 300, width = 8, height = 6)
+
+private_plot_HOBO<- function(data, titlee){
+  plottable <- data %>% group_by(location, thr) %>% summarise(count = n()) %>% mutate(thr=1-thr)
+  add <- tibble(location=c("Tasmania, Australia", "Zimbabwe"), thr=0.1, count = 0)
+  plottable <- bind_rows(plottable, add)
+  ggplot(plottable, aes(x = thr, y = count, fill = location)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Frequency threshold", y = "Private SNPs", fill = "Location") +
+  ggtitle(titlee) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  ylim(0,25) #+ xlim(0,0.6)
+}
+(plothobo <- private_plot_HOBO(tib_hobo, "Hobo"))
+```

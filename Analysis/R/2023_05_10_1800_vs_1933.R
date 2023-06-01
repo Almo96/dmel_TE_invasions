@@ -7,7 +7,7 @@ df_0 <- read.csv("/Volumes/INTENSO/merged/CSV/GDL_ols_museum.csv", header = FALS
 names(df_0) <- c("run_accession","TE", "All_reads", "HQ_reads")
 
 
-df_metadata <- read.table("/Users/ascarpa/Downloads/dataset-metadata.txt", sep = "\t", header = TRUE)
+df_metadata <- read.table("/Users/ascarpa/dmel_TE_invasions/dataset-metadata", sep = "\t", header = TRUE)
 
 df_2 <- inner_join(df_0, df_metadata, by = "run_accession") 
 
@@ -159,12 +159,18 @@ df_museum_a <- df_2 %>%
 df_GDL_museum_8a_TEs <- subset(df_museum_a, TE == "412"|TE== "OPUS"|TE == "BLOOD"|TE =="CIRC"|TE =="INVADER4")
 
 df_GDL_museum_8a_TEs$study <- factor(df_GDL_museum_8a_TEs$estimated_year, levels = c(1800, 1933))
-df_GDL_museum_8a_TEs$TE <- factor(df_GDL_museum_8a_TEs$TE, levels = c("412", "OPUS","BLOOD","CIRC","INVADER4"))
+df_GDL_museum_8a_TEs$TE <- factor(df_GDL_museum_8a_TEs$TE, levels = c("412", "BLOOD","OPUS","CIRC","INVADER4"))
 
 fig_1C <- ggplot(df_GDL_museum_8a_TEs, aes(x = as.factor(estimated_year), y = All_reads)) +
   geom_boxplot() +
   geom_signif(comparisons = list(c("1800", "1933")), map_signif_level = TRUE, textsize = 2) +
   facet_wrap(~ TE, nrow = 1) +
+  facet_wrap(~ TE, nrow = 1, labeller = labeller(TE = 
+                                                   c("412" = "412",
+                                                     "BLOOD" = "Blood",
+                                                     "OPUS" = "Opus",
+                                                     "CIRC" = "Circe",
+                                                     "INVADER4" = "Invader-4")))+
   labs(x = "year", y = "copy number")
 
 plot(fig_1C)

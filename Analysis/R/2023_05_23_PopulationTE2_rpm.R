@@ -7,11 +7,11 @@ theme_set(theme_bw())
 #ls -1 *bam | parallel -j 12 java -jar /Users/ascarpa/popte2-v1.10.03.jar stat-reads --bam {} --hier /Users/ascarpa/dmel_TE_invasions/ref/teseqs.hier --output {}.read-stat.txt
 
 df_0 <- read.csv("/Users/ascarpa/dmel_TE_invasions/Analysis/Pop2_reads.csv", header = TRUE)
-df_0$rpm_tot <- df_0$reads/df_0$reads_in_file
-df_0$rpm_map <- df_0$reads/df_0$reads_mapped
+df_0$rpm_tot <- (df_0$reads*1000000)/df_0$reads_in_file
+df_0$rpm_map <- (df_0$reads*1000000)/df_0$reads_mapped
 
 
-df_metadata <- read.table("/Users/ascarpa/Downloads/dataset-metadata.txt", sep = "\t", header = TRUE)
+df_metadata <- read.table("/Users/ascarpa/dmel_TE_invasions/dataset-metadata", sep = "\t", header = TRUE)
 
 df_1 <- inner_join(df_0, df_metadata, by = "run_accession") 
 

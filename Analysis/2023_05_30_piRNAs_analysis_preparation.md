@@ -1,0 +1,59 @@
+2023_05_30_piRNAs_analysis_preparation
+================
+Almorò Scarpa
+
+Steps to analyze the piRNAs from 10 GDL strains:
+
+Remove the adapter sequence and put then new files in a folder
+
+``` bash
+for file in *.fastq.gz; do filename=$(basename "$file" .fastq); cutadapt -j 10 -a TGGAATTCTCGGGTGCCAAGG -o "./noadapt/$filename" "$file"; done
+```
+
+In parallel remove the extra column and name the new files .clean:
+
+``` bash
+ls *.fastq.gz | parallel 'output_file=$(basename {} .fastq.gz); gzip -cd {} | awk "{print \$1}" | gzip -c > "$output_file.clean.fastq.gz"'
+```
+
+Size filter, this will keep only small RNAs:
+
+``` bash
+ls *.clean.fastq.gz | parallel 'output_file=$(basename {} .clean.fastq.gz); gzip -cd {} | paste - - - - | awk "length(\$2) > 17 && length(\$2) < 36" | tr "\t" "\n" | gzip -c > "$output_file.trim.fastq.gz"'
+```
+
+Novoalign to index the fast file with all the RNAs:
+
+``` bash
+novoindex newfilename.nvi fastafile
+```
+
+Map wit Novoalign:
+
+``` bash
+for file in *.trim.fastq.gz; do filename=$(basename "$file" .trim.fastq.gz); gzip -cd "$file" | /Applications/novocraft/novoalign -d /Volumes/INTENSO/piRNA/allRNA.nvi -f - -F STDFQ -o SAM -o FullNW -r RANDOM > "${filename}.sam"; done
+```
+
+Turn .sam into bam:
+
+``` bash
+for i in *.sam ; do n=${i%.sam} ; samtools view -Sb $i > bam/$n.bam ; done
+```
+
+Sort the .bam file:
+
+``` bash
+for i in *.bam ; do n=${i%.bam} ; samtools sort $i -o $n.sort ; done
+```
+
+piRNAs on TEs:
+
+``` bash
+for i in *.sort; do n=${i%.sort}; samtools view $i |python /Volumes/INTENSO/piRNA/scripts/graph-piRNA-distribution-onTE.py --sam - --sample-id $n > $n-graph-on-TE.forR ; done
+```
+
+Ping-pong:
+
+``` bash
+for i in *.sort; do n=${i%.sort}; samtools view $i | python /Volumes/INTENSO/piRNA/scripts/ping-pong-signature.py --sam - --max-mm 2 --sample-id $n > /Volumes/INTENSO/piRNA/noadapt/bam/$n.pps ; done
+```
