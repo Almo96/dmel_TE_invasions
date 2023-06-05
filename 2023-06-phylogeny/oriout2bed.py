@@ -13,7 +13,7 @@ import collections
 
 class TEInsertion:
 	tecounter=1
-	def __init__(self,fam,chrm,start,end,strand,div,qstart,qend):
+	def __init__(self,fam,chrm,start,end,strand,div,qstart,qend,sid):
 		self.fam=fam
 		self.chrm=chrm
 		self.start=start
@@ -22,13 +22,15 @@ class TEInsertion:
 		self.div=div
 		self.qstart=qstart
 		self.qend=qend
+		self.sid=sid
 		self.counter=TEInsertion.tecounter
 		TEInsertion.tecounter+=1
 	
 	def __str__(self):
 		# chr1 20 25 forward 1 +
 		# chr1 20 25 reverse 1 -
-		topr=[self.chrm, str(self.start), str(self.end), self.fam+"_"+str(self.tecounter),str(self.qend-self.qstart),  self.strand]
+		name=self.fam+"_"+self.sid+"_"+str(self.counter)
+		topr=[self.chrm, str(self.start), str(self.end),name ,str(self.qend-self.qstart),  self.strand]
 		return "\t".join(topr)
 
 
@@ -75,7 +77,7 @@ class TEBuilder:
 """
 
 
-def read_rm(rmfile):
+def read_rm(rmfile,sid):
 	#reli=collections.defaultdict(lambda:collections.defaultdict(lambda:collections.defaultdict(lambda:[])))
 	toret=[]
 	for l in open(rmfile):
@@ -100,7 +102,7 @@ def read_rm(rmfile):
   		#	3610 0.00 0.51 0.00             2L_RaGOO  24790789  24791182 (1354966) 	C               PPI251     Unspecified  (2493)     414      19    
 		assert(end>start)
 		assert(qend>qstart)
-		te=TEInsertion(fam,chrm,start,end,strand,div,qstart,qend)
+		te=TEInsertion(fam,chrm,start,end,strand,div,qstart,qend,sid)
 		#reli[fam][chrm][strand].append(te)
 		toret.append(te)
 	return toret
@@ -119,11 +121,12 @@ Authors
     Robert Kofler
 """)
 parser.add_argument("--rm", type=str, required=True, dest="rm", default=None, help="repeat masker file")
+parser.add_argument("--sid", type=str, required=True, dest="sid", default=None, help="repeat masker file")
 #parser.add_argument("--dist", type=int, required=True, dest="dist", default=None, help="distance")
 args = parser.parse_args()
 
 
-rm=read_rm(args.rm)
+rm=read_rm(args.rm,args.sid)
 
 
 
