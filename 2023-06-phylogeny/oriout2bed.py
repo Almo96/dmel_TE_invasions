@@ -88,6 +88,7 @@ def read_rm(rmfile):
 		qstart,qend=0,0
 		if(strand=="C"):
 			qstart,qend=int(raw3),int(raw2)
+			strand="-"
 		elif(strand=="+"):
 			qstart,qend=int(raw1),int(raw2)
 		else:
