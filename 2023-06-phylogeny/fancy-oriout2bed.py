@@ -30,7 +30,10 @@ class TEInsertion:
 		# chr1 20 25 forward 1 +
 		# chr1 20 25 reverse 1 -
 		name=self.fam+"_"+self.sid+"_"+str(self.counter)
-		topr=[self.chrm, str(self.start), str(self.end),name ,str(self.qend-self.qstart),  self.strand]
+		#lengsq=str(self.qend-self.qstart)
+		lengsref=str(self.end-self.start)
+
+		topr=[self.chrm, str(self.start), str(self.end),name ,lengsref,  self.strand]
 		return "\t".join(topr)
 
 
