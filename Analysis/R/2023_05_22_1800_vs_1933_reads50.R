@@ -9,8 +9,7 @@ df_0 <- read.csv("/Volumes/HD_Almo/dmel_museum_50/CSV/GDL_ols_50_museum.csv", he
 names(df_0) <- c("run_accession","TE", "All_reads", "HQ_reads")
 
 
-df_metadata <- read.table("/Users/ascarpa/Downloads/dataset-metadata.txt", sep = "\t", header = TRUE)
-
+df_metadata <- read.table("/Users/ascarpa/dmel_TE_invasions/dataset-metadata", sep = "\t", header = TRUE)
 df_2 <- inner_join(df_0, df_metadata, by = "run_accession") 
 
 
@@ -29,7 +28,7 @@ df_filtering <- df_Harwich %>%
 #the deviaTE_plots.
 
 df_filtering <- df_filtering %>%
-  filter(!(TE %in% c("DV26847", "KEPLER", "Q", "TARTVIR", "TARTYAK")))
+  filter(!(TE %in% c("Dmel_rhi", "Dmel_rpl32", "Dmel_tj", "DV26847", "KEPLER", "Q", "TARTVIR", "TARTYAK")))
 
 df_museum_1800 <- inner_join(df_museum_1800, df_filtering, by = "TE")
 df_Harwich <- inner_join(df_Harwich, df_filtering, by = "TE")
@@ -220,3 +219,4 @@ table_fig2_ordered <- table_fig2 %>%
   select(TE, all_of(samples_2))
 
 table_fig2_ordered
+

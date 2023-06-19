@@ -27,7 +27,7 @@ df_filtering <- df_Harwich %>%
 #the deviaTE_plots.
 
 df_filtering <- df_filtering %>%
-  filter(!(TE %in% c("DV26847", "KEPLER", "Q", "TARTVIR", "TARTYAK")))
+  filter(!(TE %in% c("Dmel_rhi", "Dmel_rpl32", "Dmel_tj", "DV26847", "KEPLER", "Q", "TARTVIR", "TARTYAK")))
 
 df_museum_1800 <- inner_join(df_museum_1800, df_filtering, by = "TE")
 df_Harwich <- inner_join(df_Harwich, df_filtering, by = "TE")
