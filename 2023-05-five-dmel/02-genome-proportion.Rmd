@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Assembly size
 
 ```{bash eval=FALSE}
-for i in *.fasta; do echo $i; done                                                                                                                    
+for i in *.fasta; do echo $i; done                                                                                          222                          
 #Canton-S.fasta
 #DGRP-732.fasta
 #Iso1.fasta

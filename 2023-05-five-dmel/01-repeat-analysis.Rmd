@@ -27,6 +27,12 @@ Defragment files
 for i in *ori.out; do python ../info/rm-defragmenter.py --rm $i --fai ../info/teseqs.fasta.fai --dist 100 > ../raw-defrag/$i.def; done
 ```
 
+Extract fragments
+```{bash eval=FALSE}
+cat Canton-S.fasta.ori.out.def|awk '$1=="412"|| $1=="BLOOD" || $1=="OPUS"' | awk '$6>1 && $6<25' > cans-ob4.txt
+```
+
+
 Append file name and merge
 ```{bash eval=FALSE}
 awk '{print $0,FILENAME}' *.ori.out.def|perl -pe 's/\.fasta\.ori\.out\.def//' > merged.def   
