@@ -110,3 +110,128 @@ cat raw-merged/old-fragments.bed|awk '{print $4 "\t" $4}'|perl -pe 's/_(\d)+$//'
 # 3R_RaGOO  3191734 3198491 BLOOD_208
 # 3R_RaGOO  3417640 3424656 BLOOD_210
 ```
+
+# Supplementary Figure - CantonS in more detail
+
+``` r
+library(tidyverse)
+theme_set(theme_bw())
+
+h<-read.table("/Users/rokofler/analysis/dmel_TE_invasions/2023-11-reviewer-degraded/raw-merged/Canton-S.merged",header=F)
+names(h)<-c("te","chr","strand","start","end","qstart","qend","div","fraglen","telen")
+h$lenfraction <- h$fraglen / h$telen
+h<-subset(h,te %in% c("BLOOD","OPUS","412")) 
+tp<-subset(h,fraglen>100)
+p <- ggplot(tp, aes(x=div))+geom_histogram(bins=80)+facet_grid(.~te)
+plot(p)
+```
+
+![](01-extract-degraded_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+``` r
+pdf(file="/Users/rokofler/analysis/dmel_TE_invasions/2023-11-reviewer-degraded/graph/cans-hist.pdf",width=6,height=3)
+plot(p)
+dev.off()
+```
+
+    ## quartz_off_screen 
+    ##                 2
+
+``` r
+tp<-subset(h,fraglen>100 & div <25 & div >1.5)
+tp<-tp[order(tp$te, tp$fraglen,decreasing=TRUE),]
+tp$id<-c(1:sum(tp$te=="OPUS"),1:sum(tp$te=="BLOOD"),1:sum(tp$te=="412"))
+
+p<-ggplot(tp,aes(x = qstart, y = id, xend = qend, yend = id,color=div))+geom_segment(size=1)+facet_grid(.~te,scales="free_x")+xlab("position")+ylab("TE fragment")
+
+plot(p)
+```
+
+![](01-extract-degraded_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
+
+``` r
+pdf(file="/Users/rokofler/analysis/dmel_TE_invasions/2023-11-reviewer-degraded/graph/cans-line.pdf",width=6.5,height=4)
+plot(p)
+dev.off()
+```
+
+    ## quartz_off_screen 
+    ##                 2
+
+``` r
+h<-read.table("/Users/rokofler/analysis/dmel_TE_invasions/2023-11-reviewer-degraded/raw-merged/Canton-S.merged",header=F)
+names(h)<-c("te","chr","strand","start","end","qstart","qend","div","fraglen","telen")
+h$lenfraction <- h$fraglen / h$telen
+h<-subset(h,te %in% c("BLOOD","OPUS","412")) 
+tp<-subset(h,fraglen>100 & div <25 )
+tp$fragtype="consensus"
+tp[tp$div>1.5,]$fragtype="diverged"
+
+tp$fragtype <- factor(tp$fragtype, levels=c("consensus","diverged"))
+tp<-tp[order(tp$te, tp$fragtype, tp$fraglen,decreasing=TRUE),]
+
+
+tp<-tp %>% group_by(te,fragtype) %>% mutate(id = row_number())
+tp$id=-1*tp$id
+
+p<-ggplot(tp,aes(x = qstart, y = id, xend = qend, yend = id,color=div))+
+  geom_segment(size=1)+facet_grid(fragtype~te,scales="free",space="free")+
+  xlab("position")+ylab("TE fragment")+
+  theme(axis.text.y =element_blank(), axis.ticks.y =element_blank())+
+  scale_colour_gradientn(
+    colours = c("green","yellow","red")
+)
+plot(p)
+```
+
+![](01-extract-degraded_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+``` r
+pdf(file="/Users/rokofler/analysis/dmel_TE_invasions/2023-11-reviewer-degraded/graph/cans-line-all.pdf",width=7,height=5)
+plot(p)
+dev.off()
+```
+
+    ## quartz_off_screen 
+    ##                 2
+
+# manhatten plots
+
+``` r
+h<-read.table("/Users/rokofler/analysis/dmel_TE_invasions/2023-11-reviewer-degraded/raw-merged/Canton-S.merged",header=F)
+names(h)<-c("te","chr","strand","start","end","qstart","qend","div","fraglen","telen")
+h$lenfraction <- h$fraglen / h$telen
+h<-subset(h,te %in% c("BLOOD","OPUS","412")) 
+
+h$chr<-recode_factor(h$chr, X_RaGOO="X","2L_RaGOO"="2L","2R_RaGOO"="2R", "3L_RaGOO"="3L","3R_RaGOO"="3R","4_RaGOO"="4") 
+h$te<-recode_factor(h$te, BLOOD="Blood","OPUS"="Opus","412"="412") 
+keeporder<-c("X","2L","2R", "3L","3R","4")
+h<-subset(h,chr %in% keeporder)
+
+tp<-subset(h,fraglen>100 & div <25  )
+tp$fragtype="consensus"
+tp[tp$div>1.5,]$fragtype="diverged"
+
+p<-ggplot(tp,aes(x = start, y = 0, xend = start, yend = lenfraction,color=div))+
+  geom_segment(size=1)+facet_grid(te+fragtype~chr,scales="free_x",space="free_x")+
+ xlab("position")+ylab("length fraction of TE insertion [0-1]")+
+  scale_colour_gradientn(colours = c("green","yellow","red"))+
+  scale_x_continuous(breaks=c(0,10000000,20000000,30000000),
+                     labels=c("0","10m","20m","30m"))+
+  theme(legend.position = "none")+
+  scale_y_continuous(breaks=c(0,0.5,1.0))
+
+#)
+plot(p)
+```
+
+![](01-extract-degraded_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+``` r
+pdf(file="/Users/rokofler/analysis/dmel_TE_invasions/2023-11-reviewer-degraded/graph/cans-mhp.pdf",width=7,height=5)
+plot(p)
+dev.off()
+```
+
+    ## quartz_off_screen 
+    ##                 2
